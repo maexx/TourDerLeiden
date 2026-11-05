@@ -438,7 +438,7 @@
 
     const routeMap = document.getElementById('routemap');
     const gpxFiles = routeSections.flatMap((section) => section.downloads.map((route) => route.file));
-    const colors = ['#6a1b3d', '#d4af37', '#2f9e44', '#1971c2', '#ae3ec9', '#f08c00'];
+    const colors = ['#6a1b3d', '#d4af37', '#2f9e44', '#1971c2', '#ae3ec9', '#f08c00', '#0c8599', '#495057'];
     const rawRouteCoordinates = window.gpxRouteCoordinates || window.routeCoordinates || {};
 
     function normalizeRouteKey(value) {
@@ -478,11 +478,13 @@
         .map((file, index) => {
           const coordinates = findRouteCoordinates(file);
           if (!coordinates || !coordinates.length) return null;
-          const routeMeta = routeSections.flatMap((s) => s.downloads).find((r) => r.file === file);
+          const sectionIndex = routeSections.findIndex((section) =>
+            section.downloads.some((route) => route.file === file)
+          );
           return {
             file,
-            label: routeMeta ? routeMeta.label : 'GPX-Track',
-            color: colors[index % colors.length],
+            label: sectionIndex >= 0 ? `Tag ${sectionIndex}` : 'GPX-Track',
+            color: colors[(sectionIndex >= 0 ? sectionIndex : index) % colors.length],
             coordinates
           };
         })
@@ -557,7 +559,7 @@
         )
         .join('');
 
-      const legend = availableRoutes
+      const legend = Array.from(new Map(availableRoutes.map((route) => [route.label, route])).values())
         .map(
           (route) =>
             `<li><span style="background:${route.color}"></span>${escapeHtml(route.label)}</li>`
@@ -608,24 +610,6 @@
             opacity: 0.85,
             lineJoin: 'round'
           }).bindTooltip(route.label, { sticky: true }).addTo(map);
-        });
-
-        Object.entries(routePhotoMap).forEach(([key, photos]) => {
-          const section = routeSections.find((s) => s.photoKey === key);
-          const sectionRoutes = section ? section.downloads.map((d) => d.file) : [];
-          const coords = sectionRoutes.flatMap((f) => findRouteCoordinates(f));
-          if (!coords.length || !photos.length) return;
-          const midCoord = coords[Math.floor(coords.length / 2)];
-          const firstPhoto = photos[0];
-          const thumbIcon = L.divIcon({
-            className: 'leaflet-photo-marker',
-            html: `<img src="assets/gallery-web/${firstPhoto}" alt="">`,
-            iconSize: [48, 48],
-            iconAnchor: [24, 24]
-          });
-          L.marker([midCoord[0], midCoord[1]], { icon: thumbIcon })
-            .bindPopup(`<strong>${section ? section.title : key}</strong><br><img src="assets/gallery-web/${firstPhoto}" style="width:120px;border-radius:6px;margin-top:4px">`)
-            .addTo(map);
         });
 
         if (allLatLngs.length) {
