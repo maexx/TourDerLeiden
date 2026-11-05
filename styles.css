@@ -240,10 +240,9 @@ section h2 {
   gap: 0.35rem;
 }
 
-.route-photos-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.route-photos-details {
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.65rem;
 }
 
 .route-photos-label {
@@ -252,6 +251,11 @@ section h2 {
   font-weight: 800;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.route-photos-details[open] .route-photos-label {
+  margin-bottom: 0.65rem;
 }
 
 .route-photos {
