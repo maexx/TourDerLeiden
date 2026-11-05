@@ -52,6 +52,11 @@
     <section id="jahr-2027">
       <h2>Touren 2027</h2>
       <p class="route-intro">GPX-Dateien, sortiert nach Variante. Zum Herunterladen auf den Dateinamen klicken.</p>
+      <h3>Routenkarte 2027</h3>
+      <p class="route-intro">Die Etappen sind je Variante farblich markiert. Über die Auswahl kannst du Varianten ein- und ausblenden.</p>
+      <div id="year-map-controls" class="year-map-controls" aria-label="Sichtbare Routenvarianten"></div>
+      <div id="year-route-map" class="route-map year-route-map" aria-label="Karte der GPX-Routen 2027"></div>
+      <p id="year-map-status" class="route-map-status" role="status" aria-live="polite"></p>
       <div class="year-variant-grid">
         <article class="year-variant">
           <h3>VAR A</h3>
@@ -1091,5 +1096,6 @@
     mergeAllPhotosIntoRouteMap();
     renderRoutePhotos();
   </script>
+  <script src="assets/gpx-2027-map.js"></script>
 </body>
 </html>
