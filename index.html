@@ -70,8 +70,9 @@
 
     <section id="strecke">
       <h2>Tour 2026: Strecke &amp; Bilder</h2>
-      <p class="route-intro">Alle vorhandenen GPX-Tracks der Tour 2026 sind unten verlinkt und direkt auf der Karte eingebunden.</p>
+      <p class="route-intro">Die aktuellen GPX-Tracks der Tour 2026 sind unten verlinkt und direkt auf der Karte eingebunden. Entfernung und Höhenmeter werden aus den Tracks angezeigt.</p>
       <div id="routemap" class="route-map leaflet-map" aria-label="Übersichtskarte der GPX-Tracks 2026"></div>
+      <p id="route-summary" class="route-summary" aria-live="polite"></p>
       <div class="route-list" id="route-list"></div>
     </section>
 
@@ -134,7 +135,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Stand: 07.08.2026</p>
+    <p>Stand: 05.11.2026</p>
   </footer>
 
   <script src="assets/gpx-routes.js"></script>
@@ -144,88 +145,118 @@
       {
         title: 'Tag 0: Tuebingen - Urlau',
         photoKey: 'tag-0',
+        distanceKm: 113.6,
+        ascentMeters: 1831,
         downloads: [
           {
-            file: 'assets/gpx/2026-07-24_3136751824_TDL2026T0 Derendingen- Zwiefalten.gpx',
-            label: 'Derendingen - Zwiefalten'
-          },
-          {
-            file: 'assets/gpx/2026-07-24_3136780149_TDL2026 T0 Zwiefalten nach Urlau.gpx',
-            label: 'Zwiefalten - Urlau'
+            file: 'assets/gpx/2026/Tag0.gpx',
+            label: 'Tag 0',
+            distanceKm: 113.6,
+            ascentMeters: 1831
           }
         ]
       },
       {
         title: 'Tag 1: Urlau - Illanz',
         photoKey: 'tag-1',
+        distanceKm: 155.2,
+        ascentMeters: 1655,
         downloads: [
           {
-            file: 'assets/gpx/2026-07-30_2751431057_TDL2016- HERLAZ- CUNEO - Tag 1.gpx',
-            label: 'HERLAZ - CUNEO - Tag 1'
+            file: 'assets/gpx/2026/Tag1.gpx',
+            label: 'Tag 1',
+            distanceKm: 155.2,
+            ascentMeters: 1655
           }
         ]
       },
       {
         title: 'Tag 2: Illanz - Oberwald',
         photoKey: 'tag-2',
+        distanceKm: 91.7,
+        ascentMeters: 2693,
         downloads: [
           {
-            file: 'assets/gpx/2026-01-16_2751431059_TDL2016- HERLAZ- CUNEO - Tag 2 (1).gpx',
-            label: 'HERLAZ - CUNEO - Tag 2'
+            file: 'assets/gpx/2026/Tag2.gpx',
+            label: 'Tag 2',
+            distanceKm: 91.7,
+            ascentMeters: 2693
           }
         ]
       },
       {
         title: 'Tag 3: Oberwald - Col de La Fordaz',
         photoKey: 'tag-3',
+        distanceKm: 138.2,
+        ascentMeters: 2069,
         downloads: [
           {
-            file: 'assets/gpx/2026-01-16_2751431060_TDL2016- HERLAZ- CUNEO - Tag 3 (1).gpx',
-            label: 'HERLAZ - CUNEO - Tag 3'
+            file: 'assets/gpx/2026/Tag3.gpx',
+            label: 'Tag 3',
+            distanceKm: 138.2,
+            ascentMeters: 2069
           }
         ]
       },
       {
         title: 'Tag 4: Col de La Fordaz - Le Chapieux',
         photoKey: 'tag-4',
+        distanceKm: 126.7,
+        ascentMeters: 2828,
         downloads: [
           {
-            file: 'assets/gpx/2026-08-02_2751431061_TDL2016- HERLAZ- CUNEO - Tag 4.gpx',
-            label: 'HERLAZ - CUNEO - Tag 4'
+            file: 'assets/gpx/2026/Tag4.gpx',
+            label: 'Tag 4',
+            distanceKm: 126.7,
+            ascentMeters: 2828
           }
         ]
       },
       {
         title: 'Tag 5: Les Chapieux - Susa',
         photoKey: 'tag-5',
+        distanceKm: 90.9,
+        ascentMeters: 2300,
         downloads: [
           {
-            file: 'assets/gpx/2026-08-03_3167364239_von Bessans nach Susa.gpx',
-            label: 'von Bessans nach Susa'
+            file: 'assets/gpx/2026/Tag5-1.gpx',
+            label: 'Tag 5 – Abschnitt 1',
+            distanceKm: 21.3,
+            ascentMeters: 1172
           },
           {
-            file: 'assets/gpx/2026-08-03_3171124295_Rennrad-Fahrt.gpx',
-            label: 'Rennrad-Fahrt 03.08.2026'
+            file: 'assets/gpx/2026/Tag5-2.gpx',
+            label: 'Tag 5 – Abschnitt 2',
+            distanceKm: 69.6,
+            ascentMeters: 1128
           },
         ]
       },
       {
         title: 'Tag 6: Lago Maggiore',
         photoKey: 'tag-6',
+        distanceKm: 27.1,
+        ascentMeters: 981,
         downloads: [
           {
-            file: 'assets/gpx/2026-08-04_3171124517_Rennrad-Fahrt.gpx',
-            label: 'Rennrad-Fahrt 04.08.2026'
+            file: 'assets/gpx/2026/Tag6.gpx',
+            label: 'Tag 6',
+            distanceKm: 27.1,
+            ascentMeters: 981
           }
         ]
       },
       {
         title: 'Tag 7: Gotthardpass',
         photoKey: 'tag-7',
+        distanceKm: 14.3,
+        ascentMeters: 961,
         downloads: [
           {
-            file: 'assets/gpx/2026-08-05_3176734033_Rennrad-Fahrt.gpx',
-            label: 'Rennrad-Fahrt 05.08.2026'
+            file: 'assets/gpx/2026/Tag7.gpx',
+            label: 'Tag 7',
+            distanceKm: 14.3,
+            ascentMeters: 961
           }
         ]
       }
@@ -316,13 +347,19 @@
     };
 
     const routeList = document.getElementById('route-list');
+    const routeSummary = document.getElementById('route-summary');
+    const totalDistanceKm = routeSections.reduce((total, section) => total + section.distanceKm, 0);
+    const totalAscentMeters = routeSections.reduce((total, section) => total + section.ascentMeters, 0);
+    const formatDistance = (distance) => `${distance.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} km`;
+    const formatAscent = (ascent) => `${ascent.toLocaleString('de-DE')} hm`;
+    routeSummary.textContent = `Gesamt: ${formatDistance(totalDistanceKm)} · ${formatAscent(totalAscentMeters)}`;
     routeList.innerHTML = routeSections
       .map((section) => {
         const downloads = section.downloads.length
           ? `<div class="route-downloads">${section.downloads
               .map(
                 (route) =>
-                  `<a href="${route.file}" download>GPX herunterladen (${route.label})</a>`
+                  `<a href="${route.file}" download>GPX herunterladen (${route.label} · ${formatDistance(route.distanceKm)} · ${formatAscent(route.ascentMeters)})</a>`
               )
               .join('')}</div>`
           : '<span class="route-note">noch keine GPX-Datei vorhanden</span>';
@@ -331,6 +368,7 @@
           <article class="route-item">
             <div class="route-heading">
               <strong>${section.title}:</strong>
+              <span class="route-stage-stats">${formatDistance(section.distanceKm)} · ${formatAscent(section.ascentMeters)}</span>
               ${downloads}
             </div>
             <details class="route-photos-details">

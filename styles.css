@@ -219,6 +219,21 @@ section h2 {
   font-weight: 600;
 }
 
+.route-summary {
+  margin: 0.8rem 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fbf7f1;
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.route-stage-stats {
+  color: #5f4d3d;
+  font-weight: 600;
+}
+
 .route-note {
   color: #7a6d5b;
   font-style: italic;
