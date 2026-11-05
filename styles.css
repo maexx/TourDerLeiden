@@ -256,6 +256,44 @@ section h2 {
   object-fit: cover;
 }
 
+.year-variant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1rem;
+}
+
+.year-variant {
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fbf7f1;
+}
+
+.year-variant h3 {
+  margin: 0 0 0.75rem;
+  color: var(--color-primary);
+}
+
+.year-file-list {
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.year-file-list a {
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}
+
+.year-empty {
+  margin-bottom: 0;
+  color: #7a6d5b;
+  font-style: italic;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
