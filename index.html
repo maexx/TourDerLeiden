@@ -1007,7 +1007,7 @@
       const stem = fileName.replace(/\.[^.]+$/, '');
       const patterns = [
         /^(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})$/,
-        /(?:^|[_-])(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})(?:$|[_-])/,
+        /(?:^|[_-])(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})(?:\(\d+\))?(?:$|[_-])/,
         /(?:^|[_-])(\d{4})[-_](\d{2})[-_](\d{2})[-_ T](\d{2})[-_](\d{2})[-_](\d{2})(?:$|[_-])/,
         /IMG_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/,
         /^(signal)-(\d{4})-(\d{2})-(\d{2})-(\d{2})-(\d{2})-(\d{2})/,
@@ -1026,7 +1026,6 @@
 
     const galleryManualDayGroups = {
       0: [
-        'Ralf__IMG_20260808_190845.jpg',
         'Tori__IMG_5524.JPG',
         'Tori__IMG_5525.JPG',
         'Tori__IMG_5558.JPG'
@@ -1057,20 +1056,55 @@
       return acc;
     }, {});
 
+    // Die Tagesnummern folgen den Aufzeichnungsdaten der GPX-Tracks.
     const galleryDayOrderByDate = {
-      '2026-07-30': 0,
-      '2026-07-31': 0,
-      '2026-08-01': 1,
-      '2026-08-02': 2,
-      '2026-08-03': 3,
-      '2026-08-04': 4,
-      '2026-08-05': 5,
-      '2026-08-06': 6,
-      '2026-08-07': 7,
+      '2026-07-29': 0,
+      '2026-07-30': 1,
+      '2026-07-31': 2,
+      '2026-08-01': 3,
+      '2026-08-02': 4,
+      '2026-08-03': 5,
+      '2026-08-04': 6,
+      '2026-08-05': 7,
       '2026-08-08': 7,
-      '2026-08-09': 7,
       '2026-08-10': 7
     };
+
+    // Undatierte Kameraserien sind anhand ihrer Bildfolge und erkennbarer Streckenpunkte gruppiert.
+    const undatedPhotoDayRanges = [
+      {
+        prefix: 'Tori__IMG_',
+        ranges: [
+          [5523, 5558, 0], [5559, 5563, 1], [5564, 5607, 2], [5608, 5619, 3],
+          [5620, 5655, 4], [5656, 5695, 5], [5696, 5703, 6], [5704, 5731, 7]
+        ]
+      },
+      {
+        prefix: 'Jochen__IMG_',
+        ranges: [[8065, 8065, 0], [8067, 8074, 2], [8077, 8091, 4], [8111, 8123, 5], [8125, 8126, 6]]
+      },
+      {
+        prefix: 'IMG_',
+        ranges: [[4619, 4637, 0], [4638, 4655, 4], [4656, 4666, 5], [4669, 4671, 6]]
+      }
+    ];
+
+    function getDayForUndatedSequence(fileName) {
+      const sequence = undatedPhotoDayRanges.find(({ prefix }) => fileName.startsWith(prefix));
+      if (!sequence) return null;
+
+      const match = fileName.slice(sequence.prefix.length).match(/^\d+/);
+      if (!match) return null;
+
+      const number = Number(match[0]);
+      const range = sequence.ranges.find(([start, end]) => number >= start && number <= end);
+      return range ? range[2] : null;
+    }
+
+    routeSections.forEach((section) => {
+      routePhotoMap[section.photoKey] = (routePhotoMap[section.photoKey] || [])
+        .filter((file) => !parseDateFromName(file) && !Number.isInteger(getDayForUndatedSequence(file)));
+    });
 
     function formatDateKey(date) {
       if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
@@ -1082,6 +1116,17 @@
     }
 
     function getDayForPhoto(fileName) {
+      const parsedDate = parseDateFromName(fileName);
+      const dateKey = formatDateKey(parsedDate);
+      if (dateKey && Number.isInteger(galleryDayOrderByDate[dateKey])) {
+        return galleryDayOrderByDate[dateKey];
+      }
+
+      const sequenceDay = getDayForUndatedSequence(fileName);
+      if (Number.isInteger(sequenceDay)) {
+        return sequenceDay;
+      }
+
       const overrideDay = galleryDayOverrideByFile[fileName];
       if (Number.isInteger(overrideDay)) {
         return overrideDay;
@@ -1090,12 +1135,6 @@
       const routeDay = galleryDayByRouteFile[fileName];
       if (Number.isInteger(routeDay)) {
         return routeDay;
-      }
-
-      const parsedDate = parseDateFromName(fileName);
-      const dateKey = formatDateKey(parsedDate);
-      if (dateKey && Number.isInteger(galleryDayOrderByDate[dateKey])) {
-        return galleryDayOrderByDate[dateKey];
       }
 
       return routeSections.length - 1;
