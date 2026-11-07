@@ -52,8 +52,14 @@ body {
   font-weight: 600;
 }
 
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
   color: var(--color-accent);
+}
+
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 
 .history-year-grid {

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 – 25 Jahre TDL</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+<body>
+  <header class="site-header">
+    <h1>25 Jahre TDL</h1>
+    <p class="subtitle">Jubiläumsseite – alles Wichtige an einem Ort</p>
+  </header>
+
+  <nav class="site-nav" aria-label="Hauptnavigation">
+    <a href="index.html">Überblick</a>
+    <a href="historie.html">Historie 2002–2025</a>
+    <a href="2026.html">2026</a>
+    <a href="2027.html" aria-current="page">2027</a>
+    <a href="links.html">Links &amp; Ressourcen</a>
+  </nav>
+
+  <main>
+    <section id="jahr-2027">
+      <h2>Touren 2027</h2>
+      <p class="route-intro">GPX-Dateien, sortiert nach Variante. Zum Herunterladen auf den Dateinamen klicken.</p>
+      <h3>Routenkarte 2027</h3>
+      <p class="route-intro">Die Etappen sind je Variante farblich markiert. Über die Auswahl kannst du Varianten ein- und ausblenden.</p>
+      <div id="year-map-controls" class="year-map-controls" aria-label="Sichtbare Routenvarianten"></div>
+      <div id="year-route-map" class="route-map year-route-map" aria-label="Karte der GPX-Routen 2027"></div>
+      <p id="year-map-status" class="route-map-status" role="status" aria-live="polite"></p>
+      <div class="year-variant-grid">
+        <article class="year-variant">
+          <h3>VAR A</h3>
+          <p class="route-stage-stats">681,5 km · 8.791 hm</p>
+          <ul class="year-file-list">
+            <li><a href="assets/gpx/2027/VARA/2026-11-06_3382801206_2027%20VAR1A%20-%20komoot.gpx" download>2027 VAR1A – komoot.gpx</a></li>
+          </ul>
+        </article>
+        <article class="year-variant">
+          <h3>VAR B</h3>
+          <p class="route-stage-stats">702,8 km · 14.298 hm</p>
+          <ul class="year-file-list">
+            <li><a href="assets/gpx/2027/VARB/2026-11-06_3382761993_TDL2027_B1%20-%20komoot.gpx" download>TDL2027_B1 – komoot.gpx</a></li>
+          </ul>
+        </article>
+        <article class="year-variant">
+          <h3>VAR C</h3>
+          <p class="route-stage-stats">745,1 km · 16.223 hm</p>
+          <ul class="year-file-list">
+            <li><a href="assets/gpx/2027/VARC/2026-11-06_3382672059_TDL2027_VARC2%20-%20komoot.gpx" download>TDL2027_VARC2 – komoot.gpx</a></li>
+          </ul>
+        </article>
+        <article class="year-variant">
+          <h3>VAR D</h3>
+          <p class="route-stage-stats">657,1 km · 14.522 hm</p>
+          <ul class="year-file-list">
+            <li><a href="assets/gpx/2027/VARD/2026-11-06_3383091071_TDL2027-VARD1%20-%20komoot.gpx" download>TDL2027-VARD1 – komoot.gpx</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Stand: 05.11.2026</p>
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="assets/gpx-2027-map.js"></script>
+</body>
+</html>
