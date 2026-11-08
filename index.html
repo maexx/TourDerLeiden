@@ -4,7 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Überblick – 25 Jahre TDL</title>
+  <script>
+    try {
+      if (sessionStorage.getItem('tdl-access-granted') !== 'true') {
+        document.documentElement.classList.add('access-locked');
+      }
+    } catch {
+      document.documentElement.classList.add('access-locked');
+    }
+  </script>
   <link rel="stylesheet" href="styles.css">
+  <script src="assets/access-gate.js" defer></script>
   <script>
     const legacyPages = {
       '#historie': 'historie.html',
