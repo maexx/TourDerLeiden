@@ -64,7 +64,7 @@ body {
 
 .history-year-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 0.6rem;
 }
 
@@ -73,6 +73,18 @@ body {
   border: 1px solid var(--color-border);
   border-radius: 6px;
   background: #fbf7f1;
+}
+
+.history-year-2023 {
+  border-left: 4px solid #0072b2;
+}
+
+.history-year-2024 {
+  border-left: 4px solid #009e73;
+}
+
+.history-year-2025 {
+  border-left: 4px solid #d55e00;
 }
 
 .history-year summary {
@@ -99,6 +111,18 @@ body {
 .history-routes a {
   color: var(--color-primary);
   font-weight: 600;
+}
+
+.history-year-2023 summary {
+  color: #0072b2;
+}
+
+.history-year-2024 summary {
+  color: #009e73;
+}
+
+.history-year-2025 summary {
+  color: #d55e00;
 }
 
 main {
@@ -362,6 +386,10 @@ section h2 {
   min-height: 480px;
 }
 
+.history-route-map {
+  min-height: 480px;
+}
+
 .year-map-controls {
   display: flex;
   flex-wrap: wrap;
@@ -387,6 +415,12 @@ section h2 {
   border-radius: 2px;
 }
 
+.history-map-swatch {
+  width: 1.2rem;
+  height: 0.25rem;
+  border-radius: 2px;
+}
+
 .year-map-variant:has(input:disabled) {
   color: #7a6d5b;
 }
@@ -399,6 +433,12 @@ section h2 {
 
 .route-map-status:empty {
   display: none;
+}
+
+@media (max-width: 600px) {
+  .history-year-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .gallery-grid {

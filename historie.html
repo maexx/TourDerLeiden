@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Historie 2002–2025 – 25 Jahre TDL</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 <body>
   <header class="site-header">
@@ -24,6 +25,11 @@
     <section id="historie">
       <h2>Historie 2002–2025</h2>
       <p class="route-intro">Jedes Jahr lässt sich wie ein Ordner öffnen. Historische Dateien können später den jeweiligen Jahren zugeordnet werden.</p>
+      <h3>Routenkarte 2023–2025</h3>
+      <p class="route-intro">Die Touren sind je Jahr farblich markiert. Über die Auswahl kannst du einzelne Jahre ein- und ausblenden; eine Route anklicken, um den GPX-Download zu öffnen.</p>
+      <div id="history-map-controls" class="year-map-controls" aria-label="Sichtbare Tourjahre"></div>
+      <div id="history-route-map" class="route-map leaflet-map history-route-map" aria-label="Karte der GPX-Routen 2023 bis 2025"></div>
+      <p id="history-map-status" class="route-map-status" role="status" aria-live="polite"></p>
       <div class="history-year-grid">
         <details class="history-year"><summary>2002</summary><p>Noch keine Dateien abgelegt.</p></details>
         <details class="history-year"><summary>2003</summary><p>Noch keine Dateien abgelegt.</p></details>
@@ -46,7 +52,7 @@
         <details class="history-year"><summary>2020</summary><p>Noch keine Dateien abgelegt.</p></details>
         <details class="history-year"><summary>2021</summary><p>Noch keine Dateien abgelegt.</p></details>
         <details class="history-year"><summary>2022</summary><p>Noch keine Dateien abgelegt.</p></details>
-        <details class="history-year">
+        <details class="history-year history-year-2023">
           <summary>2023</summary>
           <p>Tour-Aufzeichnungen vom 27. Juli bis 2. August 2023.</p>
           <ul class="history-routes">
@@ -62,7 +68,7 @@
             <li><a href="assets/gpx/historie/2023/Fahrt_am_Morgen%20(5).gpx" download>02.08.2023 – Fahrt am Morgen</a></li>
           </ul>
         </details>
-        <details class="history-year">
+        <details class="history-year history-year-2024">
           <summary>2024</summary>
           <p>Tour-Aufzeichnungen vom 25. bis 31. Juli 2024.</p>
           <ul class="history-routes">
@@ -78,7 +84,7 @@
             <li><a href="assets/gpx/historie/2024/Fahrt_am_Morgen%20(5).gpx" download>31.07.2024 – Fahrt am Morgen</a></li>
           </ul>
         </details>
-        <details class="history-year">
+        <details class="history-year history-year-2025">
           <summary>2025</summary>
           <p>Tour-Aufzeichnungen vom 31. Juli bis 5. August 2025.</p>
           <ul class="history-routes">
@@ -96,5 +102,7 @@
   <footer class="site-footer">
     <p>Stand: 05.11.2026</p>
   </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="assets/gpx-historie-map.js"></script>
 </body>
 </html>
