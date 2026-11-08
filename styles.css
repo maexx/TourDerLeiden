@@ -139,16 +139,24 @@ body {
   background: #fbf7f1;
 }
 
+.history-year[class*="history-year-"] {
+  border-left: 4px solid var(--history-year-color, var(--color-border));
+}
+
+.history-year[class*="history-year-"] summary {
+  color: var(--history-year-color, var(--color-primary));
+}
+
 .history-year-2023 {
-  border-left: 4px solid #0072b2;
+  --history-year-color: #117733;
 }
 
 .history-year-2024 {
-  border-left: 4px solid #009e73;
+  --history-year-color: #a67500;
 }
 
 .history-year-2025 {
-  border-left: 4px solid #d55e00;
+  --history-year-color: #aa4499;
 }
 
 .history-year summary {
@@ -175,18 +183,6 @@ body {
 .history-routes a {
   color: var(--color-primary);
   font-weight: 600;
-}
-
-.history-year-2023 summary {
-  color: #0072b2;
-}
-
-.history-year-2024 summary {
-  color: #009e73;
-}
-
-.history-year-2025 summary {
-  color: #d55e00;
 }
 
 main {

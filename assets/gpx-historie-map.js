@@ -11,9 +11,19 @@
   }
 
   const yearColors = {
-    2023: '#0072b2',
-    2024: '#009e73',
-    2025: '#d55e00'
+    2013: '#0072b2',
+    2014: '#e69f00',
+    2015: '#009e73',
+    2016: '#d55e00',
+    2017: '#cc79a7',
+    2018: '#56b4e9',
+    2019: '#7a5195',
+    2020: '#332288',
+    2021: '#88ccee',
+    2022: '#44aa99',
+    2023: '#117733',
+    2024: '#a67500',
+    2025: '#aa4499'
   };
   const yearLayers = {};
   const map = L.map(mapElement, { scrollWheelZoom: false, preferCanvas: true });
@@ -95,7 +105,7 @@
       }
 
       map.fitBounds(bounds, { padding: [24, 24] });
-      statusElement.textContent = `${routeData.features.length} Routen aus 2023, 2024 und 2025.`;
+      statusElement.textContent = `${routeData.features.length} Routen aus ${Object.keys(yearLayers).join(', ')}.`;
     })
     .catch((error) => {
       console.error('Historische GPX-Karte konnte nicht geladen werden:', error);
