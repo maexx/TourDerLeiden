@@ -510,6 +510,23 @@ section h2 {
 }
 
 @media (max-width: 600px) {
+  .site-header {
+    padding: 1rem;
+  }
+
+  .site-nav {
+    gap: 0.6rem;
+    padding: 0.65rem 1rem;
+  }
+
+  main {
+    padding: 1rem 1rem 2rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
   .history-year-grid {
     grid-template-columns: 1fr;
   }
