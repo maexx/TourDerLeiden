@@ -350,6 +350,58 @@ section h2 {
   font-weight: 600;
 }
 
+.route-vote {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fbf7f1;
+}
+
+.route-vote h3 {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+.route-vote-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.route-vote-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.route-vote-submit {
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.route-vote-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.route-vote-status {
+  margin-bottom: 0;
+  color: #5f4d3d;
+}
+
 .route-note {
   color: #7a6d5b;
   font-style: italic;
