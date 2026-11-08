@@ -126,6 +126,20 @@ body {
   text-underline-offset: 0.25em;
 }
 
+.history-cta {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.history-cta:hover {
+  background: #4f142d;
+}
+
 .history-year-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
