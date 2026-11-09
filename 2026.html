@@ -741,18 +741,15 @@
       'IMG_4669.jpg',
       'IMG_4670.jpg',
       'IMG_4671.jpg',
-      'Tori__IMG_5523.jpg',
       'Tori__IMG_5526.jpg',
       'Tori__IMG_5539.jpg',
       'Tori__IMG_5541.jpg',
-      'Tori__IMG_5542.jpg',
       'Tori__IMG_5543.jpg',
       'Tori__IMG_5544.jpg',
       'Tori__IMG_5545.jpg',
       'Tori__IMG_5546.jpg',
       'Tori__IMG_5547.jpg',
       'Tori__IMG_5549.jpg',
-      'Tori__IMG_5550.jpg',
       'Tori__IMG_5551.jpg',
       'Tori__IMG_5552.jpg',
       'Tori__IMG_5553.jpg',
@@ -946,10 +943,19 @@
         'Tori__IMG_5525.JPG',
         'Tori__IMG_5558.JPG'
       ],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
+      1: [
+        'IMG_4623.jpg', 'IMG_4624.jpg',
+        'Tori__IMG_5541.jpg', 'Tori__IMG_5543.jpg', 'Tori__IMG_5544.jpg',
+        'Tori__IMG_5545.jpg', 'Tori__IMG_5546.jpg', 'Tori__IMG_5547.jpg',
+        'Tori__IMG_5549.jpg', 'Tori__IMG_5551.jpg', 'Tori__IMG_5552.jpg',
+        'Tori__IMG_5553.jpg', 'Tori__IMG_5554.jpg', 'Tori__IMG_5557.jpg'
+      ],
+      2: ['IMG_4626.jpg', 'Jochen__IMG_8065.jpeg'],
+      3: ['IMG_4627.jpg', 'IMG_4628.jpg'],
+      4: [
+        'IMG_4630.jpg', 'IMG_4631.jpg', 'IMG_4633.jpg',
+        'IMG_4634.jpg', 'IMG_4636.jpg', 'IMG_4637.jpg'
+      ],
       5: [],
       6: [],
       7: []
@@ -1032,6 +1038,11 @@
     }
 
     function getDayForPhoto(fileName) {
+      const overrideDay = galleryDayOverrideByFile[fileName];
+      if (Number.isInteger(overrideDay)) {
+        return overrideDay;
+      }
+
       const parsedDate = parseDateFromName(fileName);
       const dateKey = formatDateKey(parsedDate);
       if (dateKey && Number.isInteger(galleryDayOrderByDate[dateKey])) {
@@ -1041,11 +1052,6 @@
       const sequenceDay = getDayForUndatedSequence(fileName);
       if (Number.isInteger(sequenceDay)) {
         return sequenceDay;
-      }
-
-      const overrideDay = galleryDayOverrideByFile[fileName];
-      if (Number.isInteger(overrideDay)) {
-        return overrideDay;
       }
 
       const routeDay = galleryDayByRouteFile[fileName];
