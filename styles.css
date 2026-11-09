@@ -140,6 +140,71 @@ body {
   background: #4f142d;
 }
 
+.news-form {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fbf7f1;
+}
+
+.news-form h3,
+.news-form p {
+  margin: 0;
+}
+
+.news-form label {
+  font-weight: 600;
+}
+
+.news-form input,
+.news-form textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font: inherit;
+}
+
+.news-form textarea {
+  resize: vertical;
+}
+
+.news-form button,
+.news-more {
+  justify-self: start;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.news-form button:disabled,
+.news-more:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.news-post {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.news-post h3 {
+  margin: 0;
+}
+
+.news-post p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .history-year-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
