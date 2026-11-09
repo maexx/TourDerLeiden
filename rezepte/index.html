@@ -224,6 +224,13 @@
       background: #e8e1d5;
     }
 
+    .recipe-illustration {
+      display: grid;
+      place-items: center;
+      font-size: 4.5rem;
+      background: linear-gradient(135deg, #f8eadd, #e1eadc);
+    }
+
     .card-content { padding: 18px 19px 20px; }
 
     .card-meta {
@@ -370,14 +377,36 @@
       font-weight: 500;
     }
 
-    .ingredient-list, .preparation-list {
+    .preparation-list {
       margin: 0;
       padding-left: 22px;
       color: var(--muted);
       line-height: 1.65;
     }
 
-    .ingredient-list li { padding-left: 4px; }
+    .ingredient-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .ingredient-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 43px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .ingredient-icon {
+      flex: 0 0 36px;
+      text-align: center;
+      font-size: 1.45rem;
+    }
+
     .ingredient-amount { color: var(--ink); font-weight: 600; }
     .preparation-list li { margin-bottom: 9px; padding-left: 4px; }
 
@@ -490,8 +519,8 @@
     </div>
     <div class="dialog-body">
       <div class="servings-control">
-        <label for="servings">Personenzahl
-          <small>Mengen werden ausgehend von 4 Personen angepasst.</small>
+        <label for="servings"><span id="servings-label">Personenzahl</span>
+          <small id="servings-note">Mengen werden ausgehend von 4 Personen angepasst.</small>
         </label>
         <div class="servings-input">
           <button type="button" id="servings-decrease" aria-label="Eine Person weniger">&minus;</button>
@@ -765,6 +794,226 @@
           "Sobald die Spätzle an die Oberfläche steigen, mit einer Schaumkelle herausnehmen und gut abtropfen lassen. Mit den restlichen Teigportionen ebenso verfahren.",
           "Direkt servieren oder für den Gaisburger Marsch verwenden."
         ]
+      },
+      {
+        id: "chili",
+        name: "Chili con Carne",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["niki"],
+        illustration: "🌶️",
+        description: "Würziges Chili mit Rindfleisch und Kidneybohnen.",
+        baseServings: 8,
+        ingredients: [
+          { title: "Für das Chili", items: [
+            { amount: 1280, unit: "g", name: "Rinderhackfleisch" },
+            { amount: 3.2, unit: "", name: "rote Chilischoten" },
+            { amount: 3.2, unit: "große", name: "Zwiebeln" },
+            { amount: 1.6, unit: "", name: "Knoblauchzehen" },
+            { amount: 1.6, unit: "TL", name: "Kreuzkümmelpulver, gehäuft" },
+            { amount: 3.2, unit: "TL", name: "Chilipulver" },
+            { amount: 4.8, unit: "große Dosen", name: "Tomaten" },
+            { amount: 3.2, unit: "kleine Dosen", name: "Kidneybohnen" },
+            { amount: 1.6, unit: "", name: "Zimtstangen" },
+            { amount: null, unit: "", name: "Öl, Salz und Pfeffer" },
+            { amount: null, unit: "", name: "Sambal Oelek nach Geschmack" }
+          ] }
+        ],
+        preparation: [
+          "Zwiebeln und Knoblauch würfeln und in heißem Öl etwa 5 Minuten weich dünsten. Chilischoten mit Kernen hacken und mit Kreuzkümmel und Chilipulver weitere 2 Minuten mitdünsten.",
+          "Hackfleisch zugeben und bei großer Hitze krümelig anbraten. Tomaten und Zimtstangen einrühren und mit Salz und Pfeffer würzen.",
+          "Bei mittlerer Hitze etwa 90 Minuten köcheln lassen und gelegentlich umrühren. Die Bohnen 30 Minuten vor Ende hinzufügen und nach Wunsch mit Sambal Oelek abschmecken.",
+          "Mit Weißbrot und Naturjoghurt oder Guacamole servieren. Am nächsten Tag schmeckt das Chili besonders gut."
+        ]
+      },
+      {
+        id: "belgische-waffeln",
+        name: "Belgische Waffeln",
+        category: "süß",
+        categoryLabel: "Süß",
+        cooks: ["niki"],
+        illustration: "🧇",
+        description: "Luftige Waffeln mit Hefe, dazu Ahornsirup nach Geschmack.",
+        baseServings: 10,
+        servingUnit: "Stück",
+        ingredients: [
+          { title: "Für den Teig", items: [
+            { amount: 300, unit: "ml", name: "Milch" },
+            { amount: 200, unit: "ml", name: "Schlagsahne" },
+            { amount: 250, unit: "g", name: "Mehl" },
+            { amount: 70, unit: "g", name: "Zucker" },
+            { amount: 1, unit: "TL", name: "Trockenhefe" },
+            { amount: 4, unit: "", name: "Eier, getrennt" },
+            { amount: 150, unit: "g", name: "Butter, zerlassen und abgekühlt" },
+            { amount: 1, unit: "Prise", name: "Salz" },
+            { amount: null, unit: "", name: "Ahornsirup zum Servieren" }
+          ] }
+        ],
+        preparation: [
+          "Milch und Sahne bis knapp unter den Siedepunkt erhitzen. Mehl, gut zwei Drittel des Zuckers und Hefe verrühren, die Eigelbe einarbeiten.",
+          "Die Milch-Sahne-Mischung und die abgekühlte Butter unterrühren. Den Teig abgedeckt bei Zimmertemperatur etwa 1 Stunde gehen lassen.",
+          "Eiweiß und Salz steif schlagen, dabei den restlichen Zucker einrieseln lassen. Den Eischnee vorsichtig unter den Teig heben.",
+          "Im Waffeleisen portionsweise goldbraun backen und nach Geschmack mit Ahornsirup servieren."
+        ]
+      },
+      {
+        id: "gefuellte-paprika",
+        name: "Gefüllte Paprika",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["niki"],
+        illustration: "🫑",
+        description: "Paprika mit Hackfleisch, Feta und Käse aus dem Ofen.",
+        baseServings: 1,
+        servingUnit: "Rezeptmenge",
+        ingredients: [
+          { title: "Für die Paprika", items: [
+            { alternatives: [
+              { amount: 1, unit: "", name: "große Paprika" },
+              { amount: 2, unit: "", name: "kleine Paprika" }
+            ] },
+            { amount: 1, unit: "", name: "Knoblauchzehe" },
+            { amount: 1, unit: "kleine", name: "Zwiebel" },
+            { amount: 250, unit: "g", name: "Rinderhackfleisch" },
+            { amount: null, unit: "", name: "Gemüsebrühe zum Abschmecken" },
+            { amount: null, unit: "", name: "Feta und Reibekäse nach Belieben" }
+          ] }
+        ],
+        preparation: [
+          "Knoblauch und Zwiebel klein schneiden und mit dem Hackfleisch anbraten. Mit Gemüsebrühe abschmecken und nach Belieben Feta zugeben.",
+          "Paprika vorbereiten und mit der Hackfleischmischung füllen. Mit Reibekäse bestreuen und bei 200 °C etwa 10 Minuten im Ofen überbacken."
+        ]
+      },
+      {
+        id: "germknoedel",
+        name: "Germknödel",
+        category: "süß",
+        categoryLabel: "Süß",
+        cooks: ["niki"],
+        illustration: "🥟",
+        description: "Lockere Hefeknödel mit Pflaumenmus und Vanillebutter.",
+        baseServings: 8,
+        servingUnit: "Stück",
+        ingredients: [
+          { title: "Für die Knödel", items: [
+            { amount: 500, unit: "g", name: "Mehl" },
+            { amount: 1, unit: "Tütchen", name: "Trockenhefe (je 7 g)" },
+            { amount: 250, unit: "ml", name: "warme Milch" },
+            { amount: 30, unit: "g", name: "Zucker" },
+            { amount: 2, unit: "", name: "Eier" },
+            { amount: 30, unit: "g", name: "Butter, zerlassen" },
+            { amount: 1, unit: "TL", name: "Salz" },
+            { amount: 3, unit: "Tropfen", name: "Zitronenaroma" },
+            { amount: 8, unit: "EL", name: "Pflaumenmus" }
+          ] },
+          { title: "Für die Vanillebutter", items: [
+            { amount: 2, unit: "EL", name: "Butter" },
+            { amount: 1, unit: "EL", name: "Vanillezucker" }
+          ] }
+        ],
+        preparation: [
+          "Mehl in eine Schüssel geben, eine Mulde formen und Hefe, etwas Milch, Zucker, Eier, zerlassene Butter, Salz und Zitronenaroma hineingeben. Verkneten und nach und nach so viel Milch zugeben, dass der Teig nicht mehr klebt.",
+          "Abgedeckt an einem warmen Ort 45 bis 60 Minuten gehen lassen. Erneut durchkneten, in Portionen teilen und jede zu einer Kugel formen. Mit Pflaumenmus füllen und gut verschließen.",
+          "Auf Backpapier weitere 30 Minuten gehen lassen. Portionsweise in kochendem Wasser zugedeckt etwa 20 Minuten garen.",
+          "Butter und Vanillezucker erwärmen und über die fertigen Knödel geben."
+        ]
+      },
+      {
+        id: "kichererbsen-pfannkuchen",
+        name: "Kichererbsen-Pfannkuchen",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["niki"],
+        illustration: "🥞",
+        description: "Mit Rucola-Karotten-Füllung, Joghurt und Granatapfel.",
+        baseServings: 2,
+        ingredients: [
+          { title: "Für die Pfannkuchen", items: [
+            { amount: 4, unit: "", name: "Eier (Größe M)" },
+            { amount: 4, unit: "EL", name: "Kichererbsenmehl" },
+            { amount: 30, unit: "ml", name: "Milch oder Wasser" },
+            { amount: null, unit: "", name: "Salz, Pfeffer und frisch gehackte Petersilie" },
+            { amount: 2, unit: "TL", name: "Butter oder Pflanzenmargarine" }
+          ] },
+          { title: "Für die Füllung", items: [
+            { amount: 2, unit: "Handvoll", name: "Rucola" },
+            { amount: 1, unit: "", name: "Karotte" },
+            { amount: 0.5, unit: "", name: "Zitrone, der Saft" },
+            { amount: 125, unit: "g", name: "Naturjoghurt oder Quark" },
+            { amount: null, unit: "", name: "frische Kräuter, Salz und Pfeffer" },
+            { amount: 1, unit: "EL", name: "Granatapfelkerne" },
+            { amount: 1, unit: "EL", name: "heller Sesam" }
+          ] }
+        ],
+        preparation: [
+          "Eier mit Kichererbsenmehl, Milch, Salz und Pfeffer schaumig verrühren. Petersilie unterrühren.",
+          "Butter portionsweise in einer Pfanne erhitzen und den Teig bei mittlerer Hitze zu Pfannkuchen ausbacken. Wenden und nochmals 1–2 Minuten backen.",
+          "Rucola waschen, Karotte schälen und fein raspeln, dann mit Zitronensaft beträufeln.",
+          "Pfannkuchen mit Rucola, Karotte und Joghurt oder Quark belegen. Kräuter, Granatapfelkerne und Sesam darübergeben, würzen und nach Wunsch zusammenklappen."
+        ]
+      },
+      {
+        id: "bananen-schoko-muffins",
+        name: "Bananen-Schoko-Muffins",
+        category: "süß",
+        categoryLabel: "Süß",
+        cooks: ["niki"],
+        illustration: "🧁",
+        description: "Schokoladige Bananenmuffins mit bunter Verzierung.",
+        baseServings: 12,
+        servingUnit: "Stück",
+        ingredients: [
+          { title: "Für den Teig", items: [
+            { amount: 200, unit: "g", name: "Mehl (Type 405)" },
+            { amount: 2, unit: "TL", name: "Backpulver" },
+            { amount: 0.5, unit: "TL", name: "Natron" },
+            { amount: 0.25, unit: "TL", name: "Zimtpulver" },
+            { amount: 3, unit: "EL", name: "Kakaopulver" },
+            { amount: 1, unit: "", name: "Ei" },
+            { amount: 125, unit: "g", name: "brauner Zucker" },
+            { amount: 100, unit: "ml", name: "neutrales Öl" },
+            { amount: 125, unit: "g", name: "Buttermilch" },
+            { amount: 3, unit: "", name: "mittelgroße reife Bananen" }
+          ] },
+          { title: "Für Form und Verzierung", items: [
+            { amount: null, unit: "", name: "Öl oder Papierförmchen" },
+            { amount: 200, unit: "g", name: "Vollmilch-Kuvertüre" },
+            { amount: 90, unit: "", name: "Smarties" }
+          ] }
+        ],
+        preparation: [
+          "Ofen auf 180 °C vorheizen und die Muffinform einfetten oder mit Papierförmchen auslegen. Mehl, Backpulver, Natron, Zimt und Kakao vermischen.",
+          "Ei verquirlen und mit Zucker, Öl und Buttermilch verrühren. Bananen zerdrücken und unterrühren, anschließend die Mehlmischung vorsichtig unterheben.",
+          "Teig in die Förmchen verteilen und etwa 20–25 Minuten backen (Umluft 160 °C). Auskühlen lassen.",
+          "Kuvertüre im heißen Wasserbad schmelzen, Muffins eintauchen und mit Smarties verzieren."
+        ]
+      },
+      {
+        id: "sellerieschnitzel",
+        name: "Sellerieschnitzel mit Zitronenpanade",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["niki"],
+        illustration: "🍋",
+        description: "Goldbraun gebratener Sellerie mit frischer Zitronenpanade.",
+        ingredients: [
+          { title: "Für die Schnitzel", items: [
+            { amount: 600, unit: "g", name: "Sellerie" },
+            { amount: null, unit: "", name: "Meersalz und weißer Pfeffer" },
+            { amount: null, unit: "", name: "einige Tropfen Zitronensaft" },
+            { amount: 1, unit: "Tasse", name: "Weizenvollkornmehl" },
+            { amount: 2, unit: "", name: "Eier" },
+            { amount: 2, unit: "Tassen", name: "Vollkornsemmelbrösel" },
+            { amount: 1, unit: "", name: "unbehandelte Zitrone, abgeriebene Schale" },
+            { amount: null, unit: "", name: "kalt gepresstes Öl zum Ausbacken" },
+            { amount: 1, unit: "", name: "unbehandelte Zitrone, in Scheiben zum Garnieren" }
+          ] }
+        ],
+        preparation: [
+          "Sellerie schälen, waschen und in 1–2 cm dicke Scheiben schneiden. In Salzwasser bissfest kochen, herausnehmen und gut abtropfen lassen.",
+          "Mit Salz und Pfeffer würzen und mit Zitronensaft beträufeln. Zuerst in Mehl, dann in verquirltem Ei wenden.",
+          "Semmelbrösel mit Zitronenschale mischen und die Scheiben darin panieren. In Öl auf beiden Seiten goldgelb ausbacken und mit Zitronenscheiben garnieren."
+        ]
       }
     ];
 
@@ -778,9 +1027,49 @@
     const ingredientsContainer = document.getElementById("dialog-ingredients");
     const preparationList = document.getElementById("dialog-preparation");
     const activeFilters = { category: "all", cook: "all" };
-    const baseServings = 4;
+    const defaultServings = 4;
     let activeRecipe = null;
-    let activeServings = baseServings;
+    let activeServings = defaultServings;
+
+    const ingredientIcons = [
+      [/kichererbsenmehl|mehl|backpulver|natron|puddingpulver/, "🌾"],
+      [/knollensellerie|sellerie/, "🌱"],
+      [/möhre|karotte/, "🥕"],
+      [/zwiebel|lauch/, "🧅"],
+      [/knoblauch/, "🧄"],
+      [/tomate/, "🍅"],
+      [/paprika/, "🫑"],
+      [/chili|sambal/, "🌶️"],
+      [/zitrone/, "🍋"],
+      [/banane/, "🍌"],
+      [/kirsch/, "🍒"],
+      [/granatapfel/, "🍎"],
+      [/pflaumen|rosinen|sultaninen/, "🍇"],
+      [/kartoffel/, "🥔"],
+      [/ei\(er\)|eier|^ei$/, "🥚"],
+      [/milch|sahne|joghurt|quark|kokoscreme/, "🥛"],
+      [/käse|feta/, "🧀"],
+      [/butter|margarine|fett/, "🧈"],
+      [/rind|hackfleisch|roulade/, "🥩"],
+      [/hähnchen/, "🍗"],
+      [/bohnen/, "🫘"],
+      [/petersilie|kräuter|mangold|rucola|lorbeer/, "🌿"],
+      [/honig|sirup/, "🍯"],
+      [/wein|essig/, "🍷"],
+      [/öl/, "🫒"],
+      [/nüsse|sesam|erdnuss/, "🥜"],
+      [/kakao|kuvertüre|smarties|schoko/, "🍫"],
+      [/zucker|salz/, "🧂"],
+      [/pfeffer|nelken|wacholder|zimt|gewürz|koriander|kurkuma|kreuzkümmel/, "🌶️"],
+      [/wasser|brühe|fond/, "💧"],
+      [/spätzle|lasagneplatten|brot|brösel/, "🍞"]
+    ];
+
+    function ingredientIcon(ingredient) {
+      const name = ingredient.name || ingredient.alternatives.map((alternative) => alternative.name).join(" ");
+      const match = ingredientIcons.find(([pattern]) => pattern.test(name.toLocaleLowerCase("de-DE")));
+      return match ? match[1] : "🥣";
+    }
 
     function createElement(tag, className, text) {
       const element = document.createElement(tag);
@@ -795,10 +1084,16 @@
         card.dataset.category = recipe.category;
         card.dataset.cooks = recipe.cooks.join(" ");
 
-        const image = createElement("img", "recipe-image");
-        image.src = recipe.image;
-        image.alt = recipe.imageAlt;
-        image.loading = "lazy";
+        const image = recipe.illustration
+          ? createElement("div", "recipe-image recipe-illustration", recipe.illustration)
+          : createElement("img", "recipe-image");
+        if (recipe.illustration) {
+          image.setAttribute("aria-hidden", "true");
+        } else {
+          image.src = recipe.image;
+          image.alt = recipe.imageAlt;
+          image.loading = "lazy";
+        }
         card.append(image);
 
         const content = createElement("div", "card-content");
@@ -835,20 +1130,24 @@
 
         group.items.forEach((ingredient) => {
           const item = createElement("li");
+          const icon = createElement("span", "ingredient-icon", ingredientIcon(ingredient));
+          icon.setAttribute("aria-hidden", "true");
+          const content = createElement("span");
           if (ingredient.alternatives) {
             ingredient.alternatives.forEach((alternative, index) => {
-              if (index > 0) item.append(document.createTextNode(" oder "));
-              const amount = alternative.amount * activeServings / baseServings;
+              if (index > 0) content.append(document.createTextNode(" oder "));
+              const amount = alternative.amount * activeServings / (activeRecipe.baseServings || defaultServings);
               const amountText = createElement("span", "ingredient-amount", `${formatAmount(amount)}${alternative.unit ? ` ${alternative.unit}` : ""}`);
-              item.append(amountText, document.createTextNode(` ${alternative.name}`));
+              content.append(amountText, document.createTextNode(` ${alternative.name}`));
             });
           } else if (ingredient.amount === null) {
-            item.textContent = ingredient.name;
+            content.textContent = ingredient.name;
           } else {
-            const amount = ingredient.amount * activeServings / baseServings;
+            const amount = ingredient.amount * activeServings / (activeRecipe.baseServings || defaultServings);
             const amountText = createElement("span", "ingredient-amount", `${formatAmount(amount)}${ingredient.unit ? ` ${ingredient.unit}` : ""}`);
-            item.append(amountText, document.createTextNode(` ${ingredient.name}`));
+            content.append(amountText, document.createTextNode(` ${ingredient.name}`));
           }
+          item.append(icon, content);
           list.append(item);
         });
 
@@ -859,7 +1158,12 @@
 
     function openRecipe(recipe) {
       activeRecipe = recipe;
-      activeServings = baseServings;
+      activeServings = recipe.baseServings || defaultServings;
+      const unit = recipe.servingUnit || "Personen";
+      document.getElementById("servings-label").textContent = recipe.servingUnit ? "Menge" : "Personenzahl";
+      document.getElementById("servings-note").textContent = `Mengen werden ausgehend von ${activeServings} ${unit} angepasst.`;
+      document.getElementById("servings-decrease").setAttribute("aria-label", recipe.servingUnit ? "Menge verringern" : "Eine Person weniger");
+      document.getElementById("servings-increase").setAttribute("aria-label", recipe.servingUnit ? "Menge erhöhen" : "Eine Person mehr");
       document.getElementById("dialog-category").textContent = recipe.categoryLabel;
       document.getElementById("dialog-title").textContent = recipe.name;
       servingsInput.value = String(activeServings);
