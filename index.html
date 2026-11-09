@@ -41,7 +41,7 @@
     }
     .area {
       display: block;
-      padding: 1.5rem;
+      overflow: hidden;
       border: 1px solid #e0d8cd;
       border-radius: 8px;
       background: #fff;
@@ -49,6 +49,14 @@
       text-decoration: none;
     }
     .area:hover, .area:focus-visible { border-color: #6a1b3d; }
+    .area img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .area img.area-recipe-image { object-position: center 32%; }
+    .area-content { padding: 1.5rem; }
     .area h3 { margin: 0 0 0.5rem; color: #6a1b3d; font-size: 1.35rem; }
     .area p { margin: 0; }
   </style>
@@ -64,12 +72,18 @@
     <h2>Wähle einen Bereich</h2>
     <nav class="areas" aria-label="Bereiche">
       <a class="area" href="news.html">
-        <h3>TDL</h3>
-        <p>News, Historie und Touren</p>
+        <img src="assets/startseite-tdl.jpg" alt="">
+        <div class="area-content">
+          <h3>TDL</h3>
+          <p>News, Historie und Touren</p>
+        </div>
       </a>
       <a class="area" href="rezepte/">
-        <h3>Rezepte</h3>
-        <p>Unsere Rezeptsammlung</p>
+        <img class="area-recipe-image" src="assets/startseite-leckkerding.jpg" alt="">
+        <div class="area-content">
+          <h3>Leckkerding</h3>
+          <p>Unsere Rezeptsammlung</p>
+        </div>
       </a>
     </nav>
   </main>
