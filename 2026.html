@@ -69,6 +69,12 @@
             label: 'Tag 0',
             distanceKm: 113.6,
             ascentMeters: 1831
+          },
+          {
+            file: 'assets/gpx/2026/Tag0-Zwiefalten-Urlau.gpx',
+            label: 'Tag 0 – Variante Zwiefalten–Urlau',
+            mapLabel: 'Tag 0 – Variante Zwiefalten–Urlau',
+            distanceKm: 81.9
           }
         ]
       },
@@ -273,7 +279,7 @@
           ? `<div class="route-downloads">${section.downloads
               .map(
                 (route) =>
-                  `<a href="${route.file}" download>GPX herunterladen (${route.label} · ${formatDistance(route.distanceKm)} · ${formatAscent(route.ascentMeters)})</a>`
+                  `<a href="${route.file}" download>GPX herunterladen (${route.label} · ${formatDistance(route.distanceKm)}${Number.isFinite(route.ascentMeters) ? ` · ${formatAscent(route.ascentMeters)}` : ''})</a>`
               )
               .join('')}</div>`
           : '<span class="route-note">noch keine GPX-Datei vorhanden</span>';
@@ -433,9 +439,12 @@
           const sectionIndex = routeSections.findIndex((section) =>
             section.downloads.some((route) => route.file === file)
           );
+          const route = sectionIndex >= 0
+            ? routeSections[sectionIndex].downloads.find((download) => download.file === file)
+            : null;
           return {
             file,
-            label: sectionIndex >= 0 ? `Tag ${sectionIndex}` : 'GPX-Track',
+            label: route && route.mapLabel ? route.mapLabel : sectionIndex >= 0 ? `Tag ${sectionIndex}` : 'GPX-Track',
             color: colors[(sectionIndex >= 0 ? sectionIndex : index) % colors.length],
             coordinates
           };
