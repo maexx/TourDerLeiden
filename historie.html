@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Historie 2002–2025 – 25 Jahre TDL</title>
+  <title>Historie 2002–2026 – 25 Jahre TDL</title>
   <script>
     try {
       if (sessionStorage.getItem('tdl-access-granted') !== 'true') {
@@ -26,7 +26,7 @@
   <nav class="site-nav" aria-label="Hauptnavigation">
     <a href="index.html">maexx69.de</a>
     <a href="news.html">News</a>
-    <a href="historie.html" aria-current="page">Historie 2002–2025</a>
+    <a href="historie.html" aria-current="page">Historie 2002–2026</a>
     <a href="2026.html">2026</a>
     <a href="2027.html">2027</a>
     <a href="links.html">Links &amp; Ressourcen</a>
@@ -34,8 +34,8 @@
 
   <main>
     <section id="historie">
-      <h2>Historie 2002–2025</h2>
-      <p class="route-intro">GPX-Touren von 2013 bis 2025 mit farbiger Karte.</p>
+      <h2>Historie 2002–2026</h2>
+      <p class="route-intro">GPX-Touren von 2013 bis 2026 mit farbiger Karte.</p>
       <h3>Touren und GPX-Dateien</h3>
       <p class="route-intro">Tippe ein Jahr an, um seine Dateien zu sehen.</p>
       <div class="history-year-grid">
@@ -202,6 +202,21 @@
             <li><a href="assets/gpx/historie/2025/Fahrt_am_Morgen%20(3).gpx" download>05.08.2025 – Fahrt am Morgen</a></li>
           </ul>
         </details>
+        <details class="history-year history-year-2026" style="--history-year-color: #b23a48">
+          <summary>2026</summary>
+          <p>Die GPX-Tracks der Tour 2026. <a href="2026.html">Alle Etappen und Bilder ansehen</a>.</p>
+          <ul class="history-routes">
+            <li><a href="assets/gpx/2026/Tag0.gpx" download>Tag 0 – Tübingen bis Urlau</a></li>
+            <li><a href="assets/gpx/2026/Tag1.gpx" download>Tag 1 – Urlau bis Ilanz</a></li>
+            <li><a href="assets/gpx/2026/Tag2.gpx" download>Tag 2 – Ilanz bis Oberwald</a></li>
+            <li><a href="assets/gpx/2026/Tag3.gpx" download>Tag 3 – Oberwald bis Col de La Fordaz</a></li>
+            <li><a href="assets/gpx/2026/Tag4.gpx" download>Tag 4 – Col de La Fordaz bis Le Chapieux</a></li>
+            <li><a href="assets/gpx/2026/Tag5-1.gpx" download>Tag 5 – Abschnitt 1</a></li>
+            <li><a href="assets/gpx/2026/Tag5-2.gpx" download>Tag 5 – Abschnitt 2</a></li>
+            <li><a href="assets/gpx/2026/Tag6.gpx" download>Tag 6 – Lago Maggiore</a></li>
+            <li><a href="assets/gpx/2026/Tag7.gpx" download>Tag 7 – Gotthardpass</a></li>
+          </ul>
+        </details>
       </div>
       <details class="history-year history-empty-years">
         <summary>2002 bis 2012 - noch keine Tourdateien</summary>
@@ -219,10 +234,10 @@
           <details class="history-year"><summary>2012</summary><p>Noch keine Dateien abgelegt.</p></details>
         </div>
       </details>
-      <h3>Routenkarte 2013–2025</h3>
+      <h3>Routenkarte 2013–2026</h3>
       <p class="route-intro">Jedes Jahr hat eine eigene Farbe. Über die Auswahl kannst du einzelne Jahre ein- und ausblenden; eine Route anklicken, um den GPX-Download zu öffnen.</p>
       <div id="history-map-controls" class="year-map-controls" aria-label="Sichtbare Tourjahre"></div>
-      <div id="history-route-map" class="route-map leaflet-map history-route-map" aria-label="Karte der GPX-Routen 2013 bis 2025"></div>
+      <div id="history-route-map" class="route-map leaflet-map history-route-map" aria-label="Karte der GPX-Routen 2013 bis 2026"></div>
       <p id="history-map-status" class="route-map-status" role="status" aria-live="polite"></p>
 
     </section>
@@ -232,6 +247,6 @@
     <p>Stand: 05.11.2026</p>
   </footer>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="assets/gpx-historie-map.js"></script>
+  <script src="assets/gpx-historie-map.js?v=2026"></script>
 </body>
 </html>

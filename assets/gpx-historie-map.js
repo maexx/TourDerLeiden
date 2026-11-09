@@ -23,7 +23,8 @@
     2022: '#44aa99',
     2023: '#117733',
     2024: '#a67500',
-    2025: '#aa4499'
+    2025: '#aa4499',
+    2026: '#b23a48'
   };
   const yearLayers = {};
   const map = L.map(mapElement, { scrollWheelZoom: false, preferCanvas: true });
@@ -78,7 +79,7 @@
     });
   });
 
-  fetch('assets/gpx-historie-tracks.geojson')
+  fetch('assets/gpx-historie-tracks.geojson?v=2026')
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Routendaten konnten nicht geladen werden (HTTP ${response.status}).`);
