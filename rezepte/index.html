@@ -825,7 +825,7 @@
         name: "Salatsauce",
         category: "basics",
         categoryLabel: "Basics",
-        cooks: ["bapo", "niki", "jule"],
+        cooks: [],
         image: "salatsauce-bild.jpg",
         imageAlt: "Cremige Kräuter-Salatsauce",
         description: "Cremiges Joghurt-Dressing mit Kräutern und hellem Balsamico.",
@@ -852,7 +852,7 @@
         name: "Pizzateig",
         category: "basics",
         categoryLabel: "Basics",
-        cooks: ["bapo", "niki", "jule"],
+        cooks: [],
         image: "pizzateig-bild.jpg",
         imageAlt: "Gebackene Pizza mit Tomaten, Käse und Basilikum",
         description: "Luftiger Hefeteig für selbst gemachte Pizza.",
@@ -1188,10 +1188,10 @@
         const content = createElement("div", "card-content");
         const meta = createElement("div", "card-meta");
         const cookNames = { bapo: "Bapo", niki: "Niki", jule: "Jule" };
-        meta.append(
-          createElement("span", "category-tag", recipe.categoryLabel),
-          createElement("span", "cook-label", recipe.cooks.map((cook) => cookNames[cook]).join(" · "))
-        );
+        meta.append(createElement("span", "category-tag", recipe.categoryLabel));
+        if (recipe.cooks.length) {
+          meta.append(createElement("span", "cook-label", recipe.cooks.map((cook) => cookNames[cook]).join(" · ")));
+        }
         content.append(meta);
         content.append(createElement("h3", "", recipe.name));
         content.append(createElement("p", "recipe-description", recipe.description));
