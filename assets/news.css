@@ -1,0 +1,124 @@
+.news-page {
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.news-heading {
+  margin-bottom: 1.75rem;
+}
+
+.news-heading .news-eyebrow {
+  margin: 0 0 0.35rem;
+  color: #806329;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.news-heading h2 {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  border: 0;
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  line-height: 1.15;
+}
+
+.news-heading > p:last-child {
+  margin: 0;
+  color: #695b55;
+}
+
+.news-form {
+  gap: 0.65rem;
+  padding: clamp(1.15rem, 3vw, 1.75rem);
+  border: 1px solid #e8d9cf;
+  border-radius: 14px;
+  background: #fbf7f3;
+}
+
+.news-form-heading {
+  margin-bottom: 0.55rem;
+}
+
+.news-form-heading h3 {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+}
+
+.news-form-heading p {
+  margin-top: 0.25rem;
+  color: #695b55;
+  font-size: 0.92rem;
+}
+
+.news-form label {
+  color: #4a3339;
+  font-size: 0.9rem;
+}
+
+.news-form input,
+.news-form textarea {
+  min-width: 0;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #cbbdb7;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.news-form input:focus-visible,
+.news-form textarea:focus-visible,
+.news-form button:focus-visible,
+.news-more:focus-visible {
+  outline: 3px solid #bd8f42;
+  outline-offset: 2px;
+}
+
+.news-form button,
+.news-more {
+  margin-top: 0.35rem;
+  border-radius: 8px;
+}
+
+.news-form button:not(:disabled):hover,
+.news-more:not(:disabled):hover {
+  background: #4f142d;
+}
+
+#news-form-status:empty,
+#news-list-status:empty {
+  display: none;
+}
+
+.news-feed-heading {
+  margin: 2rem 0 1rem;
+  color: var(--color-primary);
+  font-size: 1.25rem;
+}
+
+.news-post {
+  margin: 0 0 0.85rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid #c9a13f;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.news-post h3 {
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}
+
+.news-post time {
+  color: #6f5c53;
+  font-size: 0.85rem;
+}
+
+.news-post p {
+  margin: 0.65rem 0 0;
+}
+
+.news-announcement {
+  background: #fcfaf6;
+}

@@ -13,7 +13,8 @@
       document.documentElement.classList.add('access-locked');
     }
   </script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261109">
+  <link rel="stylesheet" href="assets/news.css?v=20261109">
   <script src="assets/access-gate.js" defer></script>
   <script src="assets/news.js" defer></script>
   <script>
@@ -43,22 +44,29 @@
   </nav>
 
   <main>
-    <section id="news">
-      <h2>News</h2>
+    <section id="news" class="news-page">
+      <div class="news-heading">
+        <p class="news-eyebrow">Tour der Leiden</p>
+        <h2>News</h2>
+        <p>Neuigkeiten und Nachrichten aus unserer Runde.</p>
+      </div>
       <form id="news-form" class="news-form">
-        <h3>Neuen Beitrag schreiben</h3>
-        <p>Dein Beitrag erscheint sofort und ist öffentlich lesbar.</p>
+        <div class="news-form-heading">
+          <h3>Neuen Beitrag schreiben</h3>
+          <p>Dein Beitrag erscheint sofort und ist öffentlich lesbar.</p>
+        </div>
         <label for="news-author">Dein Name</label>
-        <input id="news-author" name="author" maxlength="80" required>
+        <input id="news-author" name="author" maxlength="80" autocomplete="name" placeholder="Wie heißt du?" required>
         <label for="news-message">Dein Beitrag</label>
-        <textarea id="news-message" name="message" maxlength="3000" rows="5" required></textarea>
+        <textarea id="news-message" name="message" maxlength="3000" rows="5" placeholder="Was möchtest du mit der Runde teilen?" required></textarea>
         <button type="submit">Beitrag veröffentlichen</button>
         <p id="news-form-status" role="status" aria-live="polite"></p>
       </form>
+      <h3 class="news-feed-heading">Aus der Runde</h3>
       <div id="news-posts" aria-label="Neue Beiträge"></div>
       <p id="news-list-status" role="status" aria-live="polite">Beiträge werden geladen …</p>
       <button id="news-more" class="news-more" type="button" hidden>Weitere Beiträge laden</button>
-      <article>
+      <article class="news-post news-announcement">
         <h3><time datetime="2026-11-08">08.11.2026</time></h3>
         <p>Die Routen für 2027 sind online – bitte stimmt für eure bevorzugte Variante ab.</p>
         <p><a class="history-cta" href="2027.html#abstimmung">Routen 2027 ansehen und abstimmen</a></p>
