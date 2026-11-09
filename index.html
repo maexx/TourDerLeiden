@@ -3,20 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News – 25 Jahre TDL</title>
-  <script>
-    try {
-      if (sessionStorage.getItem('tdl-access-granted') !== 'true') {
-        document.documentElement.classList.add('access-locked');
-      }
-    } catch {
-      document.documentElement.classList.add('access-locked');
-    }
-  </script>
-  <link rel="stylesheet" href="styles.css">
-  <script src="assets/access-gate.js" defer></script>
+  <title>maexx69.de</title>
   <script>
     const legacyPages = {
+      '#ueberblick': 'news.html',
+      '#news': 'news.html',
       '#historie': 'historie.html',
       '#strecke': '2026.html',
       '#jahr-2027': '2027.html',
@@ -25,34 +16,62 @@
     const legacyPage = legacyPages[location.hash];
     if (legacyPage) location.replace(legacyPage + location.search + location.hash);
   </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f7f5f2;
+      color: #2a2a2a;
+      font: 1rem/1.5 "Segoe UI", Arial, sans-serif;
+    }
+    header {
+      padding: 2rem 1.5rem;
+      background: #6a1b3d;
+      color: #fff;
+    }
+    header div, main { max-width: 900px; margin: 0 auto; }
+    h1 { margin: 0; font-size: 2rem; }
+    header p { margin: 0.3rem 0 0; }
+    main { padding: 2rem 1.5rem; }
+    h2 { color: #6a1b3d; }
+    .areas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 1rem;
+    }
+    .area {
+      display: block;
+      padding: 1.5rem;
+      border: 1px solid #e0d8cd;
+      border-radius: 8px;
+      background: #fff;
+      color: inherit;
+      text-decoration: none;
+    }
+    .area:hover, .area:focus-visible { border-color: #6a1b3d; }
+    .area h3 { margin: 0 0 0.5rem; color: #6a1b3d; font-size: 1.35rem; }
+    .area p { margin: 0; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <h1>25 Jahre TDL</h1>
-    <p class="subtitle">Jubiläumsseite – alles Wichtige an einem Ort</p>
+  <header>
+    <div>
+      <h1>maexx69.de</h1>
+      <p>Willkommen!</p>
+    </div>
   </header>
-
-  <nav class="site-nav" aria-label="Hauptnavigation">
-    <a href="index.html" aria-current="page">News</a>
-    <a href="historie.html">Historie 2002–2025</a>
-    <a href="2026.html">2026</a>
-    <a href="2027.html">2027</a>
-    <a href="links.html">Links &amp; Ressourcen</a>
-  </nav>
-
   <main>
-    <section id="news">
-      <h2>News</h2>
-      <article>
-        <h3><time datetime="2026-11-08">08.11.2026</time></h3>
-        <p>Die Routen für 2027 sind online – bitte stimmt für eure bevorzugte Variante ab.</p>
-        <p><a class="history-cta" href="2027.html#abstimmung">Routen 2027 ansehen und abstimmen</a></p>
-      </article>
-    </section>
+    <h2>Wähle einen Bereich</h2>
+    <nav class="areas" aria-label="Bereiche">
+      <a class="area" href="news.html">
+        <h3>TDL</h3>
+        <p>News, Historie und Touren</p>
+      </a>
+      <a class="area" href="rezepte/">
+        <h3>Rezepte</h3>
+        <p>Unsere Rezeptsammlung</p>
+      </a>
+    </nav>
   </main>
-
-  <footer class="site-footer">
-    <p>Stand: 08.11.2026</p>
-  </footer>
 </body>
 </html>

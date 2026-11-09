@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3eb">
+  <title>Mit Liebe gekocht, für Lenchen gesammelt.</title>
+  <script>
+    try {
+      if (sessionStorage.getItem('recipes-access-granted') !== 'true') {
+        document.documentElement.classList.add('access-locked');
+      }
+    } catch {
+      document.documentElement.classList.add('access-locked');
+    }
+  </script>
+  <link rel="stylesheet" href="../assets/recipe-gate.css">
+  <script src="../assets/access-gate.js" data-access-key="recipes-access-granted" data-access-code="121106" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f3eb;
+      --ink: #24352e;
+      --muted: #68756c;
+      --green: #355b47;
+      --green-dark: #284636;
+      --orange: #e58b52;
+      --line: #e5dfd3;
+      --white: #fffefa;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 0;
+    }
+
+    .brand {
+      color: var(--green-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--orange); }
+
+    .header-note {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(42px, 8vw, 88px) clamp(26px, 7vw, 76px);
+      border-radius: 20px;
+      background: var(--green);
+      color: white;
+    }
+
+    .hero::after {
+      position: absolute;
+      top: -108px;
+      right: -52px;
+      width: 330px;
+      height: 330px;
+      border: 1px solid rgb(255 255 255 / 15%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 35px rgb(255 255 255 / 5%), 0 0 0 70px rgb(255 255 255 / 4%);
+      content: "";
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: #f2bd8c;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin-bottom: 15px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: 1.02;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 440px;
+      margin-bottom: 0;
+      color: #e1e9e2;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    main { padding: 58px 0 76px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 27px;
+    }
+
+    h2 {
+      margin-bottom: 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.45rem);
+      font-weight: 500;
+      letter-spacing: -.035em;
+    }
+
+    .section-subtitle {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .result-count {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgb(255 254 250 / 65%);
+    }
+
+    .filter-group h3 {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-chip {
+      min-height: 38px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--ink);
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+
+    .filter-chip:hover { border-color: var(--green); }
+
+    .filter-chip[aria-pressed="true"] {
+      border-color: var(--green);
+      background: var(--green);
+      color: white;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .recipe-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--white);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgb(36 53 46 / 8%);
+    }
+
+    .recipe-card[hidden] { display: none; }
+
+    .recipe-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.45;
+      object-fit: cover;
+      background: #e8e1d5;
+    }
+
+    .card-content { padding: 18px 19px 20px; }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .category-tag {
+      padding: 5px 9px;
+      border-radius: 30px;
+      background: #f8eadd;
+      color: #87522f;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+
+    .cook-label {
+      color: var(--muted);
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+
+    .recipe-card h3 {
+      margin-bottom: 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.38rem;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+
+    .recipe-description {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .recipe-open {
+      margin-top: 16px;
+      padding: 9px 14px;
+      border: 1px solid var(--green);
+      border-radius: 100px;
+      background: transparent;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .recipe-open:hover {
+      background: var(--green);
+      color: white;
+    }
+
+    .recipe-dialog {
+      width: min(680px, calc(100% - 28px));
+      max-height: min(88vh, 900px);
+      padding: 0;
+      border: 0;
+      border-radius: 18px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+    }
+
+    .recipe-dialog::backdrop { background: rgb(25 36 30 / 60%); }
+
+    .dialog-header {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 26px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .dialog-header .eyebrow { color: var(--orange); }
+    .dialog-header h2 { margin-bottom: 0; }
+
+    .dialog-close {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 1.2rem;
+    }
+
+    .dialog-body { padding: 22px 26px 28px; }
+
+    .servings-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding: 15px 17px;
+      border-radius: 12px;
+      background: var(--white);
+    }
+
+    .servings-control label { font-weight: 600; }
+    .servings-control small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; }
+
+    .servings-input {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .servings-input button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--green);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--green);
+      font-size: 1.2rem;
+    }
+
+    .servings-input input {
+      width: 58px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .ingredient-group { margin: 0 0 22px; }
+
+    .ingredient-group h3, .preparation-heading {
+      margin-bottom: 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    .ingredient-list, .preparation-list {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .ingredient-list li { padding-left: 4px; }
+    .ingredient-amount { color: var(--ink); font-weight: 600; }
+    .preparation-list li { margin-bottom: 9px; padding-left: 4px; }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 40px 20px;
+      border: 1px dashed #c9c1b4;
+      border-radius: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+
+    footer {
+      padding: 23px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .recipe-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .filters { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .page-shell { width: min(100% - 28px, 1120px); }
+      .header-note { display: none; }
+      main { padding: 42px 0 55px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 8px; }
+      .recipe-grid { grid-template-columns: 1fr; }
+      .recipe-image { aspect-ratio: 1.6; }
+      .filters { padding: 18px; }
+      .dialog-header, .dialog-body { padding-right: 19px; padding-left: 19px; }
+      .servings-control { align-items: start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header>
+      <a class="brand" href="../index.html">maexx69<span>.de</span></a>
+      <span class="header-note">Rezepte</span>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Niki, Bapo und Jule kochen</p>
+      <h1 id="page-title">Mit Liebe gekocht, für Lenchen gesammelt.</h1>
+      <p class="hero-copy">Willkommen in unserer Rezeptsammlung. Finde etwas Süßes, Herzhaftes oder genau das Richtige für heute.</p>
+    </section>
+
+    <main>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" style="color: var(--orange); margin-bottom: 8px;">Aus unserer Küche</p>
+          <h2>Unsere Rezepte</h2>
+          <p class="section-subtitle">Ein bisschen stöbern, etwas Leckeres finden.</p>
+        </div>
+        <span class="result-count" id="result-count" aria-live="polite"></span>
+      </div>
+
+      <section class="filters" aria-label="Rezepte filtern">
+        <div class="filter-group">
+          <h3>Nach Gericht filtern</h3>
+          <div class="chip-list" id="category-filters" aria-label="Gerichtart">
+            <button class="filter-chip" type="button" data-filter-group="category" data-filter="all" aria-pressed="true">Alle</button>
+            <button class="filter-chip" type="button" data-filter-group="category" data-filter="süß" aria-pressed="false">Süß</button>
+            <button class="filter-chip" type="button" data-filter-group="category" data-filter="suppe" aria-pressed="false">Suppe</button>
+            <button class="filter-chip" type="button" data-filter-group="category" data-filter="deftig" aria-pressed="false">Deftig</button>
+            <button class="filter-chip" type="button" data-filter-group="category" data-filter="basics" aria-pressed="false">Basics</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <h3>Von wem gekocht?</h3>
+          <div class="chip-list" id="cook-filters" aria-label="Köchinnen und Köche">
+            <button class="filter-chip" type="button" data-filter-group="cook" data-filter="all" aria-pressed="true">Alle</button>
+            <button class="filter-chip" type="button" data-filter-group="cook" data-filter="bapo" aria-pressed="false">Bapo</button>
+            <button class="filter-chip" type="button" data-filter-group="cook" data-filter="niki" aria-pressed="false">Niki</button>
+            <button class="filter-chip" type="button" data-filter-group="cook" data-filter="jule" aria-pressed="false">Jule</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="recipe-grid" id="recipe-grid" aria-label="Rezeptliste">
+        <div class="empty-state" id="empty-state" hidden>
+          <strong>Hier köchelt noch etwas.</strong>
+          Für diese Auswahl gibt es noch kein Rezept.
+        </div>
+      </section>
+    </main>
+
+    <footer>Mit Liebe für Lenchen gesammelt</footer>
+  </div>
+
+  <dialog class="recipe-dialog" id="recipe-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-header">
+      <div>
+        <p class="eyebrow" id="dialog-category"></p>
+        <h2 id="dialog-title"></h2>
+      </div>
+      <button class="dialog-close" id="dialog-close" type="button" aria-label="Rezept schließen">&times;</button>
+    </div>
+    <div class="dialog-body">
+      <div class="servings-control">
+        <label for="servings">Personenzahl
+          <small>Mengen werden ausgehend von 4 Personen angepasst.</small>
+        </label>
+        <div class="servings-input">
+          <button type="button" id="servings-decrease" aria-label="Eine Person weniger">&minus;</button>
+          <input id="servings" type="number" min="1" max="40" step="1" value="4" inputmode="numeric">
+          <button type="button" id="servings-increase" aria-label="Eine Person mehr">+</button>
+        </div>
+      </div>
+      <div id="dialog-ingredients"></div>
+      <h3 class="preparation-heading">Zubereitung</h3>
+      <ol class="preparation-list" id="dialog-preparation"></ol>
+    </div>
+  </dialog>
+
+  <script>
+    const recipes = [
+      {
+        id: "sate",
+        name: "Saté-Spieße",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["bapo"],
+        image: "sate spiesse bild.png",
+        imageAlt: "Saté-Spieße mit Reis und Erdnusssauce",
+        description: "Saftige Spieße mit würziger Sauce und Reis.",
+        ingredients: [
+          { title: "Für die Spieße", items: [
+            { amount: 700, unit: "g", name: "Hähnchenbrustfilets" }
+          ] },
+          { title: "Für die Marinade", items: [
+            { amount: 60, unit: "ml", name: "Sojasauce" },
+            { amount: 1, unit: "EL", name: "heller Honig" },
+            { amount: 1, unit: "TL", name: "gemahlener Koriander" },
+            { amount: 1, unit: "TL", name: "gemahlene Kurkuma" },
+            { amount: 0.5, unit: "TL", name: "Chilipulver" },
+            { amount: 2, unit: "Zehe(n)", name: "Knoblauch" },
+            { amount: 2, unit: "TL", name: "Sesamöl" }
+          ] },
+          { title: "Für die Sauce", items: [
+            { amount: 2, unit: "EL", name: "Sojasauce" },
+            { amount: 125, unit: "g", name: "Erdnussbutter" },
+            { amount: 125, unit: "ml", name: "Kokoscreme oder -milch" },
+            { amount: 2, unit: "EL", name: "süße Chilisauce" },
+            { amount: 1, unit: "kleine", name: "Zwiebel(n)" },
+            { amount: 1, unit: "EL", name: "Öl" }
+          ] }
+        ],
+        preparation: [
+          "Aus den Zutaten eine Marinade herstellen. Hähnchenbrustfilets längs in Streifen schneiden, mit der Marinade übergießen und zugedeckt über Nacht kalt stellen.",
+          "Am nächsten Tag die Spieße etwa 30 Minuten in Wasser legen. Die Fleischstreifen ziehharmonikaartig aufspießen und im Ofen bei 200 °C etwa 5–7 Minuten garen, bis sie leicht gebräunt sind.",
+          "Für die Sauce die Zwiebel fein würfeln und in Öl glasig andünsten. Erdnussbutter, Kokoscreme, Soja- und Chilisauce einrühren und bei geringer Hitze zu einer sämigen Sauce einkochen lassen.",
+          "Mit Reis und nach Wunsch mit Gemüse servieren."
+        ]
+      },
+      {
+        id: "rouladen",
+        name: "Mangold-Rouladen",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["bapo"],
+        image: "roulade bild.png",
+        imageAlt: "Rouladen mit Spätzle und Sauce",
+        description: "Herzhafte Rouladen mit Mangold, Schafskäse und Haselnüssen.",
+        ingredients: [
+          { title: "Für die Rouladen", items: [
+            { amount: 4, unit: "", name: "Rinderroulade(n)" },
+            { amount: 6, unit: "", name: "rote Mangoldblätter" },
+            { amount: 200, unit: "g", name: "Schafskäse" },
+            { amount: 40, unit: "g", name: "gehackte Haselnüsse" },
+            { amount: null, unit: "", name: "Ras el Hanout" },
+            { amount: 60, unit: "g", name: "Rosinen oder Sultaninen" },
+            { amount: 400, unit: "ml", name: "Rotwein" },
+            { amount: null, unit: "", name: "Butter oder Margarine" },
+            { amount: null, unit: "", name: "Salz und frisch gemahlener Pfeffer" }
+          ] },
+          { title: "Für die Sauce", items: [
+            { amount: 2, unit: "kleine", name: "Zwiebel(n)" },
+            { amount: 2, unit: "kleine", name: "Möhre(n)" },
+            { amount: 0.5, unit: "", name: "Lauchstange(n)" },
+            { amount: null, unit: "", name: "Saucenbinder, falls nötig" }
+          ] }
+        ],
+        preparation: [
+          "Mangold waschen und die Stiele entfernen. Blätter klein schneiden, die Stiele aufheben. Blätter kurz in etwas Butter anschwitzen und abkühlen lassen.",
+          "Rouladen abspülen, trocken tupfen und dünn ausklopfen. Mit Pfeffer, wenig Salz und Ras el Hanout würzen. Mangold, gehackte Haselnüsse, Rosinen und Schafskäse darauf verteilen, die Ränder einklappen und die Rouladen fixieren.",
+          "Zwiebel, Möhre und Lauch putzen und grob zerkleinern. Rouladen in heißem Fett rundum scharf anbraten, Gemüse dazugeben und mit Rotwein ablöschen. Restliche Rosinen hinzufügen.",
+          "Bei geschlossenem Deckel etwa 2 Stunden schmoren. Rouladen herausnehmen, Sauce durch ein Sieb geben und nach Wunsch mit Ras el Hanout, Salz und etwas Saucenbinder abschmecken."
+        ]
+      },
+      {
+        id: "sauerbraten",
+        name: "Sauerbraten",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["bapo"],
+        image: "sauerbraten bild.png",
+        imageAlt: "Sauerbraten mit Spätzle und Sauce",
+        description: "Sauerbraten mit würziger Rotweinmarinade, Honigbrot und Rosinen.",
+        ingredients: [
+          { title: "Für das Fleisch", items: [
+            { amount: 1200, unit: "g", name: "Rindfleisch aus Schulter oder Keule" }
+          ] },
+          { title: "Für die Marinade", items: [
+            { amount: 1, unit: "Stück", name: "Knollensellerie" },
+            { amount: 1, unit: "große", name: "Möhre(n)" },
+            { amount: 2, unit: "mittelgroße", name: "Zwiebel(n)" },
+            { amount: 2, unit: "", name: "Knoblauchzehe(n)" },
+            { amount: 2, unit: "", name: "Nelken" },
+            { amount: 2, unit: "", name: "Lorbeerblätter" },
+            { amount: 10, unit: "", name: "Pfefferkörner" },
+            { amount: 5, unit: "", name: "Wacholderbeeren" },
+            { amount: null, unit: "", name: "Salz und etwas Zucker" },
+            { amount: 400, unit: "ml", name: "Rotwein" },
+            { amount: 200, unit: "ml", name: "Rotweinessig" }
+          ] },
+          { title: "Für den Braten", items: [
+            { amount: 2, unit: "EL", name: "Fett zum Anbraten" },
+            { amount: 2, unit: "", name: "Zwiebel(n)" },
+            { amount: 2, unit: "EL", name: "Honig" },
+            { amount: 200, unit: "ml", name: "Bratenfond" },
+            { amount: 100, unit: "g", name: "Honigkuchen oder Honigbrot" },
+            { amount: 4, unit: "EL", name: "Rosinen" }
+          ] }
+        ],
+        preparation: [
+          "Etwa eine Woche vor dem Kochen das Wurzelgemüse – Möhre, Sellerie, Zwiebeln und Knoblauch – klein schneiden. Mit Nelken, Lorbeer, Pfefferkörnern, Wacholderbeeren, etwas Salz und Zucker, Rotwein und Rotweinessig in ein Gefäß geben. Das Fleisch einlegen, abdecken und im Kühlschrank marinieren.",
+          "Nach einer Woche das Fleisch aus der Marinade nehmen und trocken tupfen. Marinade durch ein Sieb in einen Topf gießen und das Gemüse beiseitestellen.",
+          "Fett in einem Bräter erhitzen und das Fleisch rundum anbraten. Gemüse und Zwiebeln hinzufügen und goldgelb rösten. Honig zugeben und mit der Marinade und dem Bratenfond ablöschen. Zugedeckt bei mittlerer Hitze etwa 2 Stunden garen, bis das Fleisch zart ist.",
+          "Fleisch herausnehmen und abgedeckt warm halten. Honigbrot in die Sauce bröckeln und köcheln lassen, bis es sich aufgelöst hat. Sauce pürieren und abschmecken. Rosinen zugeben und warm werden lassen.",
+          "Fleisch aufschneiden und mit der Sauce servieren, zum Beispiel mit Kartoffelklößen und Rotkohl."
+        ]
+      },
+      {
+        id: "lasagne",
+        name: "Lasagne",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["bapo"],
+        image: "lasagne bild.png",
+        imageAlt: "Frisch gebackene Lasagne",
+        description: "Schicht für Schicht ein Liebling aus dem Ofen.",
+        ingredients: [
+          { title: "Für die Nudeln", items: [
+            { amount: 8, unit: "", name: "Lasagneplatten" },
+            { amount: null, unit: "", name: "Fett für die Form" }
+          ] },
+          { title: "Für die Bolognese", items: [
+            { amount: 600, unit: "g", name: "gemischtes Hackfleisch" },
+            { amount: 3, unit: "EL", name: "Olivenöl" },
+            { amount: 1, unit: "große", name: "Möhre(n)" },
+            { amount: 1, unit: "Stück", name: "Knollensellerie, etwa so viel wie die Möhre" },
+            { amount: 1, unit: "große", name: "Zwiebel(n)" },
+            { amount: 2, unit: "", name: "Knoblauchzehe(n)" },
+            { amount: 200, unit: "ml", name: "Weißwein" },
+            { amount: 500, unit: "ml", name: "Gemüsebrühe" },
+            { amount: 2, unit: "EL", name: "Tomatenmark" },
+            { amount: null, unit: "", name: "Salz, Pfeffer und Zucker" }
+          ] },
+          { title: "Für die Béchamelsauce", items: [
+            { amount: 2, unit: "EL", name: "Butter" },
+            { amount: 3, unit: "EL", name: "Mehl" },
+            { amount: 500, unit: "ml", name: "Milch" },
+            { amount: null, unit: "", name: "Muskat" },
+            { amount: 100, unit: "g", name: "frisch geriebener Parmesan" }
+          ] }
+        ],
+        preparation: [
+          "Möhre, Sellerie, Zwiebel und Knoblauch putzen und würfeln. Öl erhitzen, Gemüse gut anbraten und aus der Pfanne nehmen.",
+          "Hackfleisch portionsweise krümelig und kräftig anbraten. Gemüse wieder zugeben, mit Wein ablöschen und einkochen lassen. Tomatenmark einrühren, Brühe angießen und die Sauce mit Deckel sämig einkochen lassen. Mit Salz, Pfeffer und einer Prise Zucker würzen.",
+          "Für die Béchamel Butter zerlassen, Mehl einrühren und kurz anschwitzen. Milch nach und nach unter Rühren zugießen, aufkochen lassen und mit Muskat und Salz abschmecken.",
+          "Eine gefettete Auflaufform mit Lasagneplatten und den Saucen schichten. Mit einer Schicht Béchamel abschließen und Parmesan darüberstreuen.",
+          "Im vorgeheizten Backofen bei 180 °C Ober-/Unterhitze etwa 20 Minuten backen. Vor dem Portionieren einige Minuten ruhen lassen."
+        ]
+      },
+      {
+        id: "donauwelle",
+        name: "Donauwelle",
+        category: "süß",
+        categoryLabel: "Süß",
+        cooks: ["bapo"],
+        image: "donau bild.png",
+        imageAlt: "Donauwellen-Kuchen mit Kirschen und Schokolade",
+        description: "Saftiger Kuchen mit Kirschen und Schokoguss.",
+        ingredients: [
+          { title: "Für den Teig", items: [
+            { amount: 350, unit: "g", name: "Butter" },
+            { amount: 250, unit: "g", name: "Zucker" },
+            { amount: 7, unit: "", name: "Ei(er)" },
+            { amount: 450, unit: "g", name: "Mehl" },
+            { amount: 1, unit: "Pck.", name: "Backpulver" },
+            { amount: 3, unit: "EL", name: "Kakaopulver" },
+            { amount: 3, unit: "EL", name: "Puderzucker" },
+            { amount: 2, unit: "Gläser", name: "Sauerkirschen" }
+          ] },
+          { title: "Für die Creme", items: [
+            { amount: 500, unit: "ml", name: "Milch" },
+            { amount: 1, unit: "Pck.", name: "Vanillepuddingpulver" },
+            { amount: 1, unit: "Pck.", name: "Vanillinzucker" },
+            { amount: 225, unit: "g", name: "Butter" },
+            { amount: 5, unit: "EL", name: "Puderzucker" }
+          ] },
+          { title: "Für den Guss", items: [
+            { amount: 250, unit: "g", name: "Kokosfett (z. B. Palmin)" },
+            { amount: 5, unit: "EL", name: "Zucker" },
+            { amount: 5, unit: "EL", name: "Kakaopulver" },
+            { amount: 2, unit: "", name: "Ei(er)" },
+            { amount: 2, unit: "EL", name: "Milch" }
+          ] }
+        ],
+        preparation: [
+          "Butter und Zucker schaumig rühren, die Eier einzeln zufügen. Mehl mit Backpulver mischen und nach und nach unterrühren. Die Hälfte des Teigs auf ein gefettetes Backblech streichen. Die andere Hälfte mit Kakao und Puderzucker vermengen und auf dem hellen Teig verteilen. Kirschen daraufgeben und den Kuchen bei 175 °C Ober-/Unterhitze backen, anschließend auskühlen lassen.",
+          "Für die Creme den Vanillepudding nach Packungsanleitung zubereiten und abkühlen lassen. Butter und Puderzucker schaumig rühren und den abgekühlten Pudding esslöffelweise unterrühren. Die Creme auf dem ausgekühlten Teig verteilen.",
+          "Für den Guss Kokosfett schmelzen und etwas abkühlen lassen. Zucker, Kakao, Eier und Milch unterrühren. Den Guss auf der Creme verstreichen und fest werden lassen."
+        ]
+      },
+      {
+        id: "gaisburger-marsch",
+        name: "Gaisburger Marsch",
+        category: "suppe",
+        categoryLabel: "Suppe",
+        cooks: ["bapo"],
+        image: "gaisburgermarsch bild.png",
+        imageAlt: "Gaisburger Marsch mit Rindfleisch, Kartoffeln und Spätzle",
+        description: "Schwäbischer Eintopf mit Rindfleisch, Kartoffeln und Spätzle.",
+        ingredients: [
+          { title: "Für die Brühe", items: [
+            { amount: 750, unit: "g", name: "Rinderbrust" },
+            { amount: 100, unit: "g", name: "Karotten für das Suppengrün" },
+            { amount: 100, unit: "g", name: "Lauch für das Suppengrün" },
+            { amount: 100, unit: "g", name: "Petersilienwurzeln" },
+            { amount: 100, unit: "g", name: "Knollensellerie" },
+            { amount: 2, unit: "", name: "Nelken" },
+            { amount: 2, unit: "", name: "Lorbeerblätter" },
+            { amount: 8, unit: "", name: "Pfefferkörner" }
+          ] },
+          { title: "Für den Eintopf", items: [
+            { amount: 500, unit: "g", name: "festkochende Kartoffeln" },
+            { amount: 500, unit: "g", name: "Karotten" },
+            { amount: 1, unit: "Stange", name: "Lauch" },
+            { amount: 500, unit: "g", name: "selbstgemachte Spätzle" },
+            { amount: null, unit: "", name: "Salz, Pfeffer und frische Petersilie" }
+          ] }
+        ],
+        preparation: [
+          "Suppengrün, Suppengewürze und Rinderbrust in einem großen Topf mit kaltem Wasser aufsetzen. Aufkochen und etwa 90 Minuten köcheln lassen, bis das Fleisch zart ist. Fleisch herausnehmen und die Brühe durch ein Passiertuch geben. Bei Bedarf die Fettschicht vorsichtig abschöpfen.",
+          "Fleisch in mundgerechte Stücke schneiden und zurück in die Brühe geben.",
+          "Kartoffeln und Karotten waschen und schälen. Kartoffeln würfeln, Karotten in Scheiben schneiden und beides etwa 20 Minuten in der Brühe mitköcheln lassen.",
+          "Lauch in Ringe schneiden, waschen und etwa 10 Minuten in der Brühe mitköcheln lassen. Selbstgemachte Spätzle kurz in der Brühe gar ziehen lassen.",
+          "Mit Salz und Pfeffer abschmecken und mit frisch gehackter Petersilie servieren."
+        ]
+      },
+      {
+        id: "spaetzle",
+        name: "Spätzle",
+        category: "basics",
+        categoryLabel: "Basics",
+        cooks: ["bapo", "niki", "jule"],
+        image: "spätzle bild.png",
+        imageAlt: "Frisch gekochte Spätzle auf einem Teller",
+        description: "Hausgemachte Spätzle – frisch geschabt oder durch die Presse gedrückt.",
+        ingredients: [
+          { title: "Für den Teig", items: [
+            { amount: 400, unit: "g", name: "Mehl" },
+            { amount: 4, unit: "große", name: "Ei(er)" },
+            { amount: 150, unit: "ml", name: "Mineralwasser mit Kohlensäure" },
+            { amount: 8, unit: "g", name: "Salz" }
+          ] }
+        ],
+        preparation: [
+          "Mehl und Salz in eine Schüssel geben. Eier und Mineralwasser hinzufügen und alles zu einem glatten, zähflüssigen Teig verrühren. Den Teig kräftig schlagen, bis er Blasen wirft.",
+          "Einen großen Topf mit Salzwasser zum Kochen bringen. Den Teig portionsweise durch eine Spätzlepresse drücken oder von einem Brett ins Wasser schaben.",
+          "Sobald die Spätzle an die Oberfläche steigen, mit einer Schaumkelle herausnehmen und gut abtropfen lassen. Mit den restlichen Teigportionen ebenso verfahren.",
+          "Direkt servieren oder für den Gaisburger Marsch verwenden."
+        ]
+      }
+    ];
+
+    const categoryFilters = document.getElementById("category-filters");
+    const cookFilters = document.getElementById("cook-filters");
+    const recipeGrid = document.getElementById("recipe-grid");
+    const emptyState = document.getElementById("empty-state");
+    const resultCount = document.getElementById("result-count");
+    const recipeDialog = document.getElementById("recipe-dialog");
+    const servingsInput = document.getElementById("servings");
+    const ingredientsContainer = document.getElementById("dialog-ingredients");
+    const preparationList = document.getElementById("dialog-preparation");
+    const activeFilters = { category: "all", cook: "all" };
+    const baseServings = 4;
+    let activeRecipe = null;
+    let activeServings = baseServings;
+
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function renderRecipeCards() {
+      recipes.forEach((recipe) => {
+        const card = createElement("article", "recipe-card");
+        card.dataset.category = recipe.category;
+        card.dataset.cooks = recipe.cooks.join(" ");
+
+        const image = createElement("img", "recipe-image");
+        image.src = recipe.image;
+        image.alt = recipe.imageAlt;
+        image.loading = "lazy";
+        card.append(image);
+
+        const content = createElement("div", "card-content");
+        const meta = createElement("div", "card-meta");
+        const cookNames = { bapo: "Bapo", niki: "Niki", jule: "Jule" };
+        meta.append(
+          createElement("span", "category-tag", recipe.categoryLabel),
+          createElement("span", "cook-label", recipe.cooks.map((cook) => cookNames[cook]).join(" · "))
+        );
+        content.append(meta);
+        content.append(createElement("h3", "", recipe.name));
+        content.append(createElement("p", "recipe-description", recipe.description));
+
+        const openButton = createElement("button", "recipe-open", "Rezept ansehen");
+        openButton.type = "button";
+        openButton.addEventListener("click", () => openRecipe(recipe));
+        content.append(openButton);
+        card.append(content);
+        recipeGrid.insertBefore(card, emptyState);
+      });
+    }
+
+    function formatAmount(amount) {
+      return new Intl.NumberFormat("de-DE", { maximumFractionDigits: 2 }).format(amount);
+    }
+
+    function renderIngredients() {
+      ingredientsContainer.replaceChildren();
+
+      activeRecipe.ingredients.forEach((group) => {
+        const section = createElement("section", "ingredient-group");
+        section.append(createElement("h3", "", group.title));
+        const list = createElement("ul", "ingredient-list");
+
+        group.items.forEach((ingredient) => {
+          const item = createElement("li");
+          if (ingredient.alternatives) {
+            ingredient.alternatives.forEach((alternative, index) => {
+              if (index > 0) item.append(document.createTextNode(" oder "));
+              const amount = alternative.amount * activeServings / baseServings;
+              const amountText = createElement("span", "ingredient-amount", `${formatAmount(amount)}${alternative.unit ? ` ${alternative.unit}` : ""}`);
+              item.append(amountText, document.createTextNode(` ${alternative.name}`));
+            });
+          } else if (ingredient.amount === null) {
+            item.textContent = ingredient.name;
+          } else {
+            const amount = ingredient.amount * activeServings / baseServings;
+            const amountText = createElement("span", "ingredient-amount", `${formatAmount(amount)}${ingredient.unit ? ` ${ingredient.unit}` : ""}`);
+            item.append(amountText, document.createTextNode(` ${ingredient.name}`));
+          }
+          list.append(item);
+        });
+
+        section.append(list);
+        ingredientsContainer.append(section);
+      });
+    }
+
+    function openRecipe(recipe) {
+      activeRecipe = recipe;
+      activeServings = baseServings;
+      document.getElementById("dialog-category").textContent = recipe.categoryLabel;
+      document.getElementById("dialog-title").textContent = recipe.name;
+      servingsInput.value = String(activeServings);
+
+      preparationList.replaceChildren();
+      recipe.preparation.forEach((step) => preparationList.append(createElement("li", "", step)));
+      renderIngredients();
+      recipeDialog.showModal();
+    }
+
+    function updateRecipes() {
+      let visibleCount = 0;
+      const cards = [...recipeGrid.querySelectorAll(".recipe-card")];
+
+      cards.forEach((card) => {
+        const categoryMatches = activeFilters.category === "all" || card.dataset.category === activeFilters.category;
+        const cookMatches = activeFilters.cook === "all" || card.dataset.cooks.split(" ").includes(activeFilters.cook);
+        const isVisible = categoryMatches && cookMatches;
+
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      emptyState.hidden = visibleCount !== 0;
+      resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? "Rezept" : "Rezepte"}`;
+    }
+
+    [categoryFilters, cookFilters].forEach((group) => {
+      group.addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-filter-group]");
+        if (!button) return;
+
+        const { filterGroup, filter } = button.dataset;
+        activeFilters[filterGroup] = filter;
+
+        group.querySelectorAll("button[data-filter-group]").forEach((option) => {
+          option.setAttribute("aria-pressed", String(option === button));
+        });
+
+        updateRecipes();
+      });
+    });
+
+    document.getElementById("dialog-close").addEventListener("click", () => recipeDialog.close());
+
+    recipeDialog.addEventListener("click", (event) => {
+      if (event.target === recipeDialog) recipeDialog.close();
+    });
+
+    servingsInput.addEventListener("input", () => {
+      const servings = servingsInput.valueAsNumber;
+      if (!Number.isInteger(servings) || servings < 1 || servings > 40) return;
+      activeServings = servings;
+      renderIngredients();
+    });
+
+    servingsInput.addEventListener("change", () => {
+      const servings = servingsInput.valueAsNumber;
+      if (!Number.isInteger(servings) || servings < 1 || servings > 40) {
+        servingsInput.value = String(activeServings);
+      }
+    });
+
+    document.getElementById("servings-decrease").addEventListener("click", () => {
+      activeServings = Math.max(1, activeServings - 1);
+      servingsInput.value = String(activeServings);
+      renderIngredients();
+    });
+
+    document.getElementById("servings-increase").addEventListener("click", () => {
+      activeServings = Math.min(40, activeServings + 1);
+      servingsInput.value = String(activeServings);
+      renderIngredients();
+    });
+
+    renderRecipeCards();
+    updateRecipes();
+  </script>
+</body>
+</html>

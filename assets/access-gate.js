@@ -1,6 +1,6 @@
 (() => {
-  const accessKey = 'tdl-access-granted';
-  const accessCode = '110469';
+  const accessKey = document.currentScript.dataset.accessKey || 'tdl-access-granted';
+  const accessCode = document.currentScript.dataset.accessCode || '110469';
 
   try {
     if (sessionStorage.getItem(accessKey) === 'true') {

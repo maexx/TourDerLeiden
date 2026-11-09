@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News – 25 Jahre TDL</title>
+  <script>
+    try {
+      if (sessionStorage.getItem('tdl-access-granted') !== 'true') {
+        document.documentElement.classList.add('access-locked');
+      }
+    } catch {
+      document.documentElement.classList.add('access-locked');
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/access-gate.js" defer></script>
+  <script>
+    const legacyPages = {
+      '#historie': 'historie.html',
+      '#strecke': '2026.html',
+      '#jahr-2027': '2027.html',
+      '#links': 'links.html'
+    };
+    const legacyPage = legacyPages[location.hash];
+    if (legacyPage) location.replace(legacyPage + location.search + location.hash);
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>25 Jahre TDL</h1>
+    <p class="subtitle">Jubiläumsseite – alles Wichtige an einem Ort</p>
+  </header>
+
+  <nav class="site-nav" aria-label="Hauptnavigation">
+    <a href="index.html">maexx69.de</a>
+    <a href="news.html" aria-current="page">News</a>
+    <a href="historie.html">Historie 2002–2025</a>
+    <a href="2026.html">2026</a>
+    <a href="2027.html">2027</a>
+    <a href="links.html">Links &amp; Ressourcen</a>
+  </nav>
+
+  <main>
+    <section id="news">
+      <h2>News</h2>
+      <article>
+        <h3><time datetime="2026-11-08">08.11.2026</time></h3>
+        <p>Die Routen für 2027 sind online – bitte stimmt für eure bevorzugte Variante ab.</p>
+        <p><a class="history-cta" href="2027.html#abstimmung">Routen 2027 ansehen und abstimmen</a></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Stand: 08.11.2026</p>
+  </footer>
+</body>
+</html>
