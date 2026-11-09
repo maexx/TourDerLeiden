@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f3eb">
-  <title>Leckkerding – Mit Liebe gekocht, für Lenchen gesammelt</title>
+  <title>Leckkerding – Niki, Jule und Bapo kochen fürs Lenchen</title>
   <script>
     try {
       if (sessionStorage.getItem('recipes-access-granted') !== 'true') {
@@ -14,16 +14,16 @@
       document.documentElement.classList.add('access-locked');
     }
   </script>
-  <link rel="stylesheet" href="../assets/recipe-gate.css">
+  <link rel="stylesheet" href="../assets/recipe-gate.css?v=weinrot">
   <script src="../assets/access-gate.js" data-access-key="recipes-access-granted" data-access-code="121106" defer></script>
   <style>
     :root {
       color-scheme: light;
       --paper: #f7f3eb;
-      --ink: #24352e;
-      --muted: #68756c;
-      --green: #355b47;
-      --green-dark: #284636;
+      --ink: #35272b;
+      --muted: #75656a;
+      --wine: #6a1b3d;
+      --wine-dark: #4b132b;
       --orange: #e58b52;
       --line: #e5dfd3;
       --white: #fffefa;
@@ -54,7 +54,7 @@
     }
 
     .brand {
-      color: var(--green-dark);
+      color: var(--wine-dark);
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.35rem;
       font-weight: 700;
@@ -75,7 +75,7 @@
       align-items: stretch;
       overflow: hidden;
       border-radius: 20px;
-      background: var(--green);
+      background: var(--wine);
       color: white;
     }
 
@@ -108,22 +108,12 @@
       position: relative;
       z-index: 1;
       max-width: 620px;
-      margin-bottom: 15px;
+      margin-bottom: 0;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(2.5rem, 6vw, 4.7rem);
       font-weight: 500;
       letter-spacing: -.055em;
       line-height: 1.02;
-    }
-
-    .hero-copy {
-      position: relative;
-      z-index: 1;
-      max-width: 440px;
-      margin-bottom: 0;
-      color: #e1e9e2;
-      font-size: 1.05rem;
-      line-height: 1.65;
     }
 
     main { padding: 58px 0 76px; }
@@ -190,11 +180,11 @@
       transition: background .15s ease, color .15s ease, border-color .15s ease;
     }
 
-    .filter-chip:hover { border-color: var(--green); }
+    .filter-chip:hover { border-color: var(--wine); }
 
     .filter-chip[aria-pressed="true"] {
-      border-color: var(--green);
-      background: var(--green);
+      border-color: var(--wine);
+      background: var(--wine);
       color: white;
     }
 
@@ -214,7 +204,7 @@
 
     .recipe-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgb(36 53 46 / 8%);
+      box-shadow: 0 12px 30px rgb(53 39 43 / 8%);
     }
 
     .recipe-card[hidden] { display: none; }
@@ -231,7 +221,7 @@
       display: grid;
       place-items: center;
       font-size: 4.5rem;
-      background: linear-gradient(135deg, #f8eadd, #e1eadc);
+      background: linear-gradient(135deg, #f8eadd, #eadce2);
     }
 
     .card-content { padding: 18px 19px 20px; }
@@ -277,15 +267,15 @@
     .recipe-open {
       margin-top: 16px;
       padding: 9px 14px;
-      border: 1px solid var(--green);
+      border: 1px solid var(--wine);
       border-radius: 100px;
       background: transparent;
-      color: var(--green);
+      color: var(--wine);
       font-weight: 600;
     }
 
     .recipe-open:hover {
-      background: var(--green);
+      background: var(--wine);
       color: white;
     }
 
@@ -300,7 +290,7 @@
       box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
     }
 
-    .recipe-dialog::backdrop { background: rgb(25 36 30 / 60%); }
+    .recipe-dialog::backdrop { background: rgb(36 25 30 / 60%); }
 
     .dialog-header {
       position: sticky;
@@ -354,10 +344,10 @@
     .servings-input button {
       width: 34px;
       height: 34px;
-      border: 1px solid var(--green);
+      border: 1px solid var(--wine);
       border-radius: 50%;
       background: var(--white);
-      color: var(--green);
+      color: var(--wine);
       font-size: 1.2rem;
     }
 
@@ -467,9 +457,7 @@
     </header>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-text">
-        <p class="eyebrow">Leckkerding – Niki, Bapo und Jule kochen</p>
-        <h1 id="page-title">Mit Liebe gekocht, für Lenchen gesammelt.</h1>
-        <p class="hero-copy">Willkommen in unserer Rezeptsammlung. Finde etwas Süßes, Herzhaftes oder genau das Richtige für heute.</p>
+        <h1 id="page-title">Niki, Jule und Bapo kochen fürs Lenchen.</h1>
       </div>
       <img class="hero-image" src="leckkerding-hero.jpg" alt="Zwei Frauen balancieren über eine Schranke im Grünen">
     </section>
@@ -801,7 +789,7 @@
         name: "Spätzle",
         category: "basics",
         categoryLabel: "Basics",
-        cooks: ["bapo", "niki", "jule"],
+        cooks: [],
         image: "spätzle bild.png",
         imageAlt: "Frisch gekochte Spätzle auf einem Teller",
         description: "Hausgemachte Spätzle – frisch geschabt oder durch die Presse gedrückt.",
