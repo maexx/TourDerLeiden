@@ -70,24 +70,27 @@
     }
 
     .hero {
-      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
       overflow: hidden;
-      padding: clamp(42px, 8vw, 88px) clamp(26px, 7vw, 76px);
       border-radius: 20px;
       background: var(--green);
       color: white;
     }
 
-    .hero::after {
-      position: absolute;
-      top: -108px;
-      right: -52px;
-      width: 330px;
-      height: 330px;
-      border: 1px solid rgb(255 255 255 / 15%);
-      border-radius: 50%;
-      box-shadow: 0 0 0 35px rgb(255 255 255 / 5%), 0 0 0 70px rgb(255 255 255 / 4%);
-      content: "";
+    .hero-text {
+      align-self: center;
+      padding: clamp(42px, 7vw, 76px) clamp(26px, 5vw, 60px);
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      object-position: center;
     }
 
     .eyebrow {
@@ -437,6 +440,8 @@
     }
 
     @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { height: auto; min-height: 0; aspect-ratio: 1.6; }
       .recipe-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .filters { grid-template-columns: 1fr; }
     }
@@ -461,9 +466,12 @@
       <span class="header-note">Leckkerding</span>
     </header>
     <section class="hero" aria-labelledby="page-title">
-      <p class="eyebrow">Leckkerding – Niki, Bapo und Jule kochen</p>
-      <h1 id="page-title">Mit Liebe gekocht, für Lenchen gesammelt.</h1>
-      <p class="hero-copy">Willkommen in unserer Rezeptsammlung. Finde etwas Süßes, Herzhaftes oder genau das Richtige für heute.</p>
+      <div class="hero-text">
+        <p class="eyebrow">Leckkerding – Niki, Bapo und Jule kochen</p>
+        <h1 id="page-title">Mit Liebe gekocht, für Lenchen gesammelt.</h1>
+        <p class="hero-copy">Willkommen in unserer Rezeptsammlung. Finde etwas Süßes, Herzhaftes oder genau das Richtige für heute.</p>
+      </div>
+      <img class="hero-image" src="leckkerding-hero.jpg" alt="Zwei Frauen balancieren über eine Schranke im Grünen">
     </section>
 
     <main>
@@ -542,7 +550,7 @@
         category: "deftig",
         categoryLabel: "Deftig",
         cooks: ["bapo"],
-        image: "sate spiesse bild.png",
+        image: "sate-spiesse-neu.jpg",
         imageAlt: "Saté-Spieße mit Reis und Erdnusssauce",
         description: "Saftige Spieße mit würziger Sauce und Reis.",
         ingredients: [
