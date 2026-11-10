@@ -14,7 +14,7 @@
     }
   </script>
   <link rel="stylesheet" href="styles.css?v=20261110-bilder">
-  <link rel="stylesheet" href="assets/news.css?v=20261109">
+  <link rel="stylesheet" href="assets/news.css?v=20261110">
   <script src="assets/access-gate.js" defer></script>
   <script src="assets/news.js" defer></script>
   <script>
@@ -34,11 +34,11 @@
   </header>
 
   <nav class="site-nav" aria-label="Hauptnavigation">
+    <a href="news.html" aria-current="page">News</a>
     <a href="2027.html">2027</a>
     <a href="bilder.html">Best of</a>
     <a href="historie.html">Historie 2002–2026</a>
     <a href="2026.html">2026</a>
-    <a href="news.html" aria-current="page">News</a>
     <a href="index.html">maexx69.de</a>
     <a href="links.html">Links &amp; Ressourcen</a>
   </nav>
@@ -50,6 +50,14 @@
         <h2>News</h2>
         <p>Neuigkeiten und Nachrichten aus unserer Runde.</p>
       </div>
+      <div id="news-posts" aria-label="Neue Beiträge"></div>
+      <p id="news-list-status" role="status" aria-live="polite">Beiträge werden geladen …</p>
+      <button id="news-more" class="news-more" type="button" hidden>Weitere Beiträge laden</button>
+      <article class="news-post news-announcement">
+        <h3><time datetime="2026-11-08">08.11.2026</time></h3>
+        <p>Die Routen für 2027 sind online – bitte stimmt für eure bevorzugte Variante ab.</p>
+        <p><a class="history-cta" href="2027.html#abstimmung">Routen 2027 ansehen und abstimmen</a></p>
+      </article>
       <form id="news-form" class="news-form">
         <div class="news-form-heading">
           <h3>Neuen Beitrag schreiben</h3>
@@ -62,15 +70,6 @@
         <button type="submit">Beitrag veröffentlichen</button>
         <p id="news-form-status" role="status" aria-live="polite"></p>
       </form>
-      <h3 class="news-feed-heading">Aus der Runde</h3>
-      <div id="news-posts" aria-label="Neue Beiträge"></div>
-      <p id="news-list-status" role="status" aria-live="polite">Beiträge werden geladen …</p>
-      <button id="news-more" class="news-more" type="button" hidden>Weitere Beiträge laden</button>
-      <article class="news-post news-announcement">
-        <h3><time datetime="2026-11-08">08.11.2026</time></h3>
-        <p>Die Routen für 2027 sind online – bitte stimmt für eure bevorzugte Variante ab.</p>
-        <p><a class="history-cta" href="2027.html#abstimmung">Routen 2027 ansehen und abstimmen</a></p>
-      </article>
     </section>
   </main>
 

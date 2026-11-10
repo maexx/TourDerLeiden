@@ -30,6 +30,7 @@
 
 .news-form {
   gap: 0.65rem;
+  margin-top: 2rem;
   padding: clamp(1.15rem, 3vw, 1.75rem);
   border: 1px solid #e8d9cf;
   border-radius: 14px;
@@ -88,12 +89,6 @@
 #news-form-status:empty,
 #news-list-status:empty {
   display: none;
-}
-
-.news-feed-heading {
-  margin: 2rem 0 1rem;
-  color: var(--color-primary);
-  font-size: 1.25rem;
 }
 
 .news-post {
