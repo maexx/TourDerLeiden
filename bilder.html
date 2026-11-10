@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bilder 2026 – TDL</title>
+  <title>Best of – TDL</title>
   <script>
     try {
       if (sessionStorage.getItem('tdl-access-granted') !== 'true') {
@@ -23,7 +23,7 @@
 
   <nav class="site-nav" aria-label="Hauptnavigation">
     <a href="2027.html">2027</a>
-    <a href="bilder.html" aria-current="page">Bilder</a>
+    <a href="bilder.html" aria-current="page">Best of</a>
     <a href="historie.html">Historie 2002–2026</a>
     <a href="2026.html">2026</a>
     <a href="news.html">News</a>
@@ -42,7 +42,7 @@
       <p class="lightbox-counter"></p>
     </div>
     <section>
-      <h2>Bilder der Tour 2026</h2>
+      <h2>Best of 2026</h2>
       <p class="route-intro">Wähle einen Tag und klicke auf ein Foto, um es groß anzusehen oder die Diashow zu starten.</p>
       <div id="gallery-days" class="route-list"></div>
     </section>
@@ -51,19 +51,18 @@
   <footer class="site-footer">
     <p>Tour der Leiden</p>
   </footer>
-  <script src="assets/gallery-2026-routes.js"></script>
+  <script src="assets/best-of-2026.js"></script>
   <script>
-    const routeSections = Array.from({ length: 8 }, (_, day) => ({ photoKey: `tag-${day}` }));
-    document.getElementById('gallery-days').innerHTML = routeSections.map((section, day) => `
+    document.getElementById('gallery-days').innerHTML = Object.keys(routePhotoMap).map((photoKey) => `
       <article class="route-item">
         <details class="route-photos-details">
-          <summary class="route-photos-label">Tag ${day}</summary>
-          <div class="route-photos" data-route="${section.photoKey}"></div>
+          <summary class="route-photos-label">Tag ${photoKey.slice(4)}</summary>
+          <div class="route-photos" data-route="${photoKey}"></div>
         </details>
       </article>
     `).join('');
   </script>
   <script src="assets/gallery-2026-view.js"></script>
-  <script src="assets/gallery-2026.js"></script>
+  <script>renderRoutePhotos();</script>
 </body>
 </html>
