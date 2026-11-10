@@ -533,6 +533,114 @@
   <script>
     const recipes = [
       {
+        id: "asia-nudeln",
+        name: "Asia-Nudeln",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["jule"],
+        image: "asia-nudeln-bild.png",
+        imageAlt: "Gebratene Asia-Nudeln mit Gemüse",
+        description: "Gebratene Mie-Nudeln mit Gemüse, Ingwer und Sojasauce.",
+        baseServings: 4,
+        ingredients: [
+          { title: "Für die Asia-Nudeln", items: [
+            { amount: 250, unit: "g", name: "Mie-Nudeln" },
+            { amount: 2, unit: "EL", name: "Erdnussöl" },
+            { amount: 0.5, unit: "", name: "rote Paprika" },
+            { amount: 5, unit: "", name: "Lauchzwiebeln" },
+            { amount: 3, unit: "", name: "Karotten" },
+            { amount: 1, unit: "Zehe", name: "Knoblauch" },
+            { amount: 1, unit: "daumengroßes Stück", name: "Ingwer" },
+            { amount: 2, unit: "EL", name: "Honig" },
+            { amount: 4, unit: "EL", name: "Sojasauce" },
+            { amount: 1, unit: "", name: "Limette" },
+            { amount: 1, unit: "TL", name: "Chiliflocken, optional" },
+            { amount: 1, unit: "TL", name: "Currypulver, optional" },
+            { amount: 1, unit: "TL", name: "Kurkuma, optional" },
+            { amount: 1, unit: "TL", name: "Koriander, optional" },
+            { amount: 1, unit: "TL", name: "Paprikapulver, optional" },
+            { amount: null, unit: "", name: "frischer Koriander, optional" },
+            { amount: null, unit: "", name: "Salz, Pfeffer und nach Wunsch Sriracha-Sauce" }
+          ] }
+        ],
+        preparation: [
+          "Mie-Nudeln nach Packungsangabe bissfest garen, kalt abspülen und abtropfen lassen.",
+          "Karotten und Paprika in Streifen schneiden. Lauchzwiebeln schneiden und das Grün beiseitelegen. Knoblauch und Ingwer fein hacken.",
+          "Karotten, Paprika und die weißen Teile der Lauchzwiebeln etwa 2 Minuten in Erdnussöl anbraten. Knoblauch, Ingwer und nach Wunsch die Gewürze kurz mitbraten; Honig und Sojasauce zugeben.",
+          "Nudeln untermischen und bis zur gewünschten Bräunung braten. Mit Limettensaft, Sojasauce, Salz, Pfeffer und nach Wunsch Sriracha abschmecken.",
+          "Mit Lauchzwiebelgrün und nach Wunsch frischem Koriander servieren."
+        ]
+      },
+      {
+        id: "fufu",
+        name: "Fufu mit Erdnusssuppe",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["jule"],
+        illustration: "🥣",
+        description: "Kartoffel-Fufu mit würziger Erdnusssuppe und Hähnchen.",
+        baseServings: 4,
+        ingredients: [
+          { title: "Für das Fufu", items: [
+            { amount: 160, unit: "g", name: "Kartoffelstärke oder Kartoffelmehl" },
+            { amount: 160, unit: "g", name: "Kartoffelpüree-Flocken" },
+            { amount: 800, unit: "ml", name: "kaltes Wasser, zunächst" },
+            { amount: 400, unit: "ml", name: "zusätzliches kaltes Wasser, nach Bedarf" },
+            { amount: null, unit: "", name: "Salz nach Wunsch" }
+          ] },
+          { title: "Für die Erdnusssuppe", items: [
+            { amount: 6, unit: "", name: "Hähnchenkeulen" },
+            { amount: 2, unit: "", name: "Zwiebeln" },
+            { amount: 2, unit: "", name: "Tomaten" },
+            { amount: 1, unit: "", name: "Paprika" },
+            { amount: 4, unit: "Zehen", name: "Knoblauch" },
+            { amount: 1, unit: "EL", name: "Erdnussbutter" },
+            { amount: 3, unit: "EL", name: "Tomatenmark" },
+            { amount: 600, unit: "ml", name: "Wasser" },
+            { amount: null, unit: "", name: "Salz, Cayennepfeffer, Paprikapulver und Pfeffer" }
+          ] }
+        ],
+        preparation: [
+          "Für die Suppe die Hälfte der Zwiebeln schneiden und mit den Hähnchenkeulen anbraten.",
+          "Die übrigen Zwiebeln, Tomaten, Paprika, Knoblauch, Erdnussbutter, Tomatenmark und das Wasser für die Suppe pürieren. Über das Hähnchen geben, würzen und etwa 1,5 Stunden köcheln lassen, bis das Hähnchen vollständig durchgegart ist.",
+          "Für das Fufu Kartoffelstärke und Kartoffelpüree-Flocken in einem stabilen Topf trocken vermischen. Nach und nach das zunächst angegebene kalte Wasser unterrühren, sodass eine gleichmäßige Masse entsteht; nach Wunsch salzen.",
+          "Bei mittlerer Hitze unter kräftigem, ständigem Rühren erwärmen. Nach etwa 5 Minuten entsteht eine dicke, formbare Masse. Falls sie zu trocken ist, vorsichtig etwas Wasser ergänzen.",
+          "Die Hände mit kaltem Wasser anfeuchten, die Masse zu Kugeln oder Klößen formen und mit der Erdnusssuppe servieren."
+        ]
+      },
+      {
+        id: "kaese-lauch-suppe",
+        name: "Käse-Lauch-Suppe",
+        category: "suppe",
+        categoryLabel: "Suppe",
+        cooks: ["jule"],
+        image: "kaese-lauch-suppe-bild.png",
+        imageAlt: "Käse-Lauch-Suppe mit Hackfleisch",
+        description: "Cremige Käse-Lauch-Suppe mit Hackfleisch und Baguette.",
+        baseServings: 4,
+        ingredients: [
+          { title: "Für die Suppe", items: [
+            { amount: 2, unit: "kleine", name: "Baguettes zum Aufbacken" },
+            { amount: 3, unit: "EL", name: "Öl" },
+            { amount: 500, unit: "g", name: "gemischtes Hackfleisch" },
+            { amount: null, unit: "", name: "Salz und Pfeffer" },
+            { amount: 3, unit: "Stangen", name: "Lauch" },
+            { amount: 700, unit: "ml", name: "Wasser" },
+            { amount: 3, unit: "", name: "Gemüsebrühwürfel" },
+            { amount: 250, unit: "g", name: "Schmelzkäse" },
+            { amount: 150, unit: "g", name: "Crème fraîche" },
+            { amount: null, unit: "", name: "Muskat, Knoblauchpulver und Zwiebelpulver nach Geschmack" }
+          ] }
+        ],
+        preparation: [
+          "Backofen auf 175 °C Ober-/Unterhitze vorheizen und die Baguettes etwa 10 Minuten aufbacken.",
+          "Öl in einem großen Topf erhitzen und das Hackfleisch krümelig und vollständig durchbraten. Mit Salz und Pfeffer würzen.",
+          "Lauch putzen, in Ringe schneiden und etwa 5 Minuten mitbraten. Wasser und Brühwürfel zugeben und die Suppe etwa 10 Minuten bei kleiner Hitze köcheln lassen.",
+          "Hitze reduzieren oder den Topf kurz vom Herd nehmen. Schmelzkäse und Crème fraîche einrühren; die Suppe nicht sprudelnd kochen lassen.",
+          "Mit Salz, Pfeffer, Muskat, Knoblauch- und Zwiebelpulver abschmecken und mit dem aufgeschnittenen Baguette servieren."
+        ]
+      },
+      {
         id: "sate",
         name: "Saté-Spieße",
         category: "deftig",
