@@ -93,6 +93,22 @@
       object-position: center;
     }
 
+    .hero-slideshow {
+      position: relative;
+      min-width: 0;
+    }
+
+    .hero-slideshow-control {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 8px 12px;
+      border: 1px solid white;
+      border-radius: 6px;
+      background: rgba(37, 22, 27, .88);
+      color: white;
+    }
+
     .eyebrow {
       margin: 0 0 14px;
       color: #f2bd8c;
@@ -459,7 +475,10 @@
       <div class="hero-text">
         <h1 id="page-title">Niki, Jule und Bapo kochen fürs Lenchen.</h1>
       </div>
-      <img class="hero-image" src="leckkerding-hero-bergsee.jpg" alt="Zwei Frauen balancieren auf einer Schranke vor einem Bergsee">
+      <div class="hero-slideshow" aria-label="Bilder aus unserer Küche">
+        <img class="hero-image" id="hero-slideshow-image" src="diashow/foto-01.jpg" alt="Erinnerungsfoto 1 von 28">
+        <button class="hero-slideshow-control" id="hero-slideshow-control" type="button" hidden>Diashow pausieren</button>
+      </div>
     </section>
 
     <main>
@@ -530,6 +549,7 @@
     </div>
   </dialog>
 
+  <script src="diashow.js" defer></script>
   <script>
     const recipes = [
       {
