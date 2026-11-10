@@ -126,6 +126,17 @@ body {
   text-underline-offset: 0.25em;
 }
 
+.resource-links {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.resource-links a {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
 .history-cta {
   display: inline-block;
   padding: 0.7rem 1rem;
@@ -475,12 +486,20 @@ section h2 {
 
 .route-photo-card {
   margin: 0;
+  padding: 0;
+  width: 100%;
   aspect-ratio: 1 / 1;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
   background: #fff;
+  cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.route-photo-card:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .route-photo-card a {
@@ -706,6 +725,7 @@ section h2 {
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.9rem;
+  z-index: 1;
 }
 
 .lightbox-counter {
@@ -715,6 +735,7 @@ section h2 {
   color: #fff;
   font-size: 0.85rem;
   margin: 0;
+  pointer-events: none;
 }
 
 .lightbox-caption {
@@ -725,6 +746,7 @@ section h2 {
   color: #fff;
   font-size: 0.85rem;
   margin: 0;
+  pointer-events: none;
 }
 
 @keyframes loading-shimmer {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilder 2026 – TDL</title>
+  <script>
+    try {
+      if (sessionStorage.getItem('tdl-access-granted') !== 'true') {
+        document.documentElement.classList.add('access-locked');
+      }
+    } catch {
+      document.documentElement.classList.add('access-locked');
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261110-bilder">
+  <script src="assets/access-gate.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>TDL</h1>
+  </header>
+
+  <nav class="site-nav" aria-label="Hauptnavigation">
+    <a href="2027.html">2027</a>
+    <a href="bilder.html" aria-current="page">Bilder</a>
+    <a href="historie.html">Historie 2002–2026</a>
+    <a href="2026.html">2026</a>
+    <a href="news.html">News</a>
+    <a href="index.html">maexx69.de</a>
+    <a href="links.html">Links &amp; Ressourcen</a>
+  </nav>
+
+  <main>
+    <div id="lightbox" class="lightbox" hidden>
+      <button class="lightbox-close" aria-label="Schließen">&times;</button>
+      <button class="lightbox-prev" aria-label="Vorheriges Bild">&#10094;</button>
+      <img class="lightbox-image" src="" alt="">
+      <button class="lightbox-next" aria-label="Nächstes Bild">&#10095;</button>
+      <button class="lightbox-play" aria-label="Diashow starten/stoppen">▶ Diashow</button>
+      <p class="lightbox-caption"></p>
+      <p class="lightbox-counter"></p>
+    </div>
+    <section>
+      <h2>Bilder der Tour 2026</h2>
+      <p class="route-intro">Wähle einen Tag und klicke auf ein Foto, um es groß anzusehen oder die Diashow zu starten.</p>
+      <div id="gallery-days" class="route-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Tour der Leiden</p>
+  </footer>
+  <script src="assets/gallery-2026-routes.js"></script>
+  <script>
+    const routeSections = Array.from({ length: 8 }, (_, day) => ({ photoKey: `tag-${day}` }));
+    document.getElementById('gallery-days').innerHTML = routeSections.map((section, day) => `
+      <article class="route-item">
+        <details class="route-photos-details">
+          <summary class="route-photos-label">Tag ${day}</summary>
+          <div class="route-photos" data-route="${section.photoKey}"></div>
+        </details>
+      </article>
+    `).join('');
+  </script>
+  <script src="assets/gallery-2026-view.js"></script>
+  <script src="assets/gallery-2026.js"></script>
+</body>
+</html>
