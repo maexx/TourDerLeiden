@@ -477,8 +477,8 @@
         <h1 id="page-title">Niki, Jule und Bapo kochen fürs Lenchen.</h1>
       </div>
       <div class="hero-slideshow" aria-label="Bilder aus unserer Küche">
-        <img class="hero-image" id="hero-slideshow-image" src="diashow/foto-01.jpg" alt="Erinnerungsfoto 1 von 28">
-        <button class="hero-slideshow-control" id="hero-slideshow-control" type="button" hidden>Diashow pausieren</button>
+        <img class="hero-image" id="hero-slideshow-image" src="diashow/foto-01.jpg" alt="Erinnerungsfoto 1 von 39">
+        <button class="hero-slideshow-control" id="hero-slideshow-control" type="button" aria-label="Diashow abspielen" title="Diashow abspielen" hidden>▶</button>
       </div>
     </section>
 
@@ -550,9 +550,40 @@
     </div>
   </dialog>
 
-  <script src="diashow.js" defer></script>
+  <script src="diashow.js?v=39" defer></script>
   <script>
     const recipes = [
+      {
+        id: "fajitas",
+        name: "Fajitas",
+        category: "deftig",
+        categoryLabel: "Deftig",
+        cooks: ["bapo"],
+        illustration: "🌯",
+        description: "Weizentortillas mit Hähnchen, Gemüse und Salsa.",
+        baseServings: 4,
+        ingredients: [
+          { title: "Für die Fajitas", items: [
+            { amount: 400, unit: "g", name: "Hähnchengeschnetzeltes" },
+            { amount: 500, unit: "g", name: "bunte Paprika" },
+            { amount: 1, unit: "Bund", name: "Frühlingszwiebeln" },
+            { amount: 2, unit: "", name: "Tomaten" },
+            { amount: 1, unit: "", name: "Eisbergsalat" },
+            { amount: 2, unit: "Becher", name: "saure Sahne" },
+            { amount: 250, unit: "g", name: "Gouda, gerieben" },
+            { amount: 1, unit: "Flasche", name: "Salsa" },
+            { amount: 8, unit: "", name: "Weizentortillas" },
+            { amount: null, unit: "", name: "Öl zum Braten" },
+            { amount: null, unit: "", name: "Salz, Pfeffer und Chilipulver" }
+          ] }
+        ],
+        preparation: [
+          "Paprika in kurze, dünne Streifen und Frühlingszwiebeln in Ringe schneiden. Tomaten würfeln.",
+          "Etwas Öl in einer tiefen Pfanne oder einem Wok erhitzen. Das Hähnchen etwa 5 Minuten anbraten und mit Salz, Pfeffer und Chilipulver würzen. Paprika und Frühlingszwiebeln zugeben und etwa 5 Minuten mitbraten; anschließend die Tomaten kurz mitbraten. Das Hähnchen vollständig durchgaren.",
+          "Eisbergsalat in Streifen schneiden. Salat, Salsa, saure Sahne und geriebenen Gouda jeweils getrennt bereitstellen.",
+          "Tortillas nach Packungsanleitung erwärmen und mit der Hähnchen-Gemüse-Füllung und den Beilagen nach Geschmack füllen."
+        ]
+      },
       {
         id: "asia-nudeln",
         name: "Asia-Nudeln",

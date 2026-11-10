@@ -1,7 +1,7 @@
 (() => {
   const image = document.getElementById("hero-slideshow-image");
   const button = document.getElementById("hero-slideshow-control");
-  const total = 28;
+  const total = 39;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let index = 1;
   let timer = null;
@@ -11,13 +11,17 @@
     window.clearInterval(timer);
     timer = null;
     playing = false;
-    button.textContent = "Diashow abspielen";
+    button.textContent = "▶";
+    button.setAttribute("aria-label", "Diashow abspielen");
+    button.title = "Diashow abspielen";
   }
 
   function start() {
     if (timer !== null) return;
     playing = true;
-    button.textContent = "Diashow pausieren";
+    button.textContent = "❚❚";
+    button.setAttribute("aria-label", "Diashow pausieren");
+    button.title = "Diashow pausieren";
     timer = window.setInterval(() => {
       index = index % total + 1;
       image.src = `diashow/foto-${String(index).padStart(2, "0")}.jpg`;
@@ -28,7 +32,8 @@
   image.addEventListener("error", () => {
     console.error("Diashow-Bild konnte nicht geladen werden:", image.src);
     stop();
-    button.textContent = "Diashow erneut starten";
+    button.setAttribute("aria-label", "Diashow erneut starten");
+    button.title = "Diashow erneut starten";
   });
   button.addEventListener("click", () => {
     if (playing) stop();
