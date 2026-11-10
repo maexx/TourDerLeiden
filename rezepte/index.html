@@ -132,6 +132,31 @@
       line-height: 1.08;
     }
 
+    .hero-video-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 24px;
+      padding: 11px 16px;
+      border: 1px solid rgb(255 255 255 / 55%);
+      border-radius: 999px;
+      background: #f2bd8c;
+      color: #351a27;
+      font-size: .95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .hero-video-link:hover {
+      background: #ffd2ac;
+      transform: translateY(-1px);
+    }
+
+    .hero-video-link:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 3px;
+    }
+
     main { padding: 58px 0 76px; }
 
     .section-heading {
@@ -475,18 +500,10 @@
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-text">
         <h1 id="page-title">Ausgezogen – aber nicht vom Fleisch gefallen</h1>
+        <a class="hero-video-link" href="https://youtu.be/YN1hL9cn7s0?feature=shared" target="_blank" rel="noopener noreferrer">Video auf YouTube ansehen</a>
       </div>
       <div class="hero-slideshow" aria-label="Bilder aus unserer Küche">
-        <img class="hero-image" id="hero-slideshow-image" alt="Erinnerungsfoto">
-        <script>
-          (() => {
-            const image = document.getElementById("hero-slideshow-image");
-            const index = Math.floor(Math.random() * 39) + 1;
-            image.dataset.photoIndex = String(index);
-            image.src = `diashow/foto-${String(index).padStart(2, "0")}.jpg`;
-            image.alt = `Erinnerungsfoto ${index} von 39`;
-          })();
-        </script>
+        <img class="hero-image" id="hero-slideshow-image" src="diashow/startbild-IMG_1170.jpeg" alt="IMG_1170 – das Startbild der Diashow">
         <button class="hero-slideshow-control" id="hero-slideshow-control" type="button" aria-label="Diashow abspielen" title="Diashow abspielen" hidden>▶</button>
       </div>
     </section>
@@ -559,7 +576,7 @@
     </div>
   </dialog>
 
-  <script src="diashow.js?v=42" defer></script>
+  <script src="diashow.js?v=43" defer></script>
   <script>
     const recipes = [
       {
