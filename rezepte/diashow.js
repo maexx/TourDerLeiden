@@ -3,8 +3,8 @@
   const button = document.getElementById("hero-slideshow-control");
   const total = 39;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let index = 1;
-  let remainingPhotos = [];
+  let remainingPhotos = shufflePhotos(0);
+  let index = remainingPhotos.shift();
   let timer = null;
   let playing = false;
 
@@ -45,6 +45,8 @@
     }, 2000);
   }
 
+  image.src = `diashow/foto-${String(index).padStart(2, "0")}.jpg`;
+  image.alt = `Erinnerungsfoto ${index} von ${total}`;
   image.addEventListener("error", () => {
     console.error("Diashow-Bild konnte nicht geladen werden:", image.src);
     stop();
