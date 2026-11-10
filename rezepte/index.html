@@ -348,6 +348,7 @@
       background: var(--white);
     }
 
+    .servings-control[hidden] { display: none; }
     .servings-control label { font-weight: 600; }
     .servings-control small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; }
 
@@ -533,7 +534,7 @@
       <button class="dialog-close" id="dialog-close" type="button" aria-label="Rezept schließen">&times;</button>
     </div>
     <div class="dialog-body">
-      <div class="servings-control">
+      <div class="servings-control" id="servings-control">
         <label for="servings"><span id="servings-label">Personenzahl</span>
           <small id="servings-note">Mengen werden ausgehend von 4 Personen angepasst.</small>
         </label>
@@ -941,6 +942,29 @@
           "Kartoffeln und Karotten waschen und schälen. Kartoffeln würfeln, Karotten in Scheiben schneiden und beides etwa 20 Minuten in der Brühe mitköcheln lassen.",
           "Lauch in Ringe schneiden, waschen und etwa 10 Minuten in der Brühe mitköcheln lassen. Selbstgemachte Spätzle kurz in der Brühe gar ziehen lassen.",
           "Mit Salz und Pfeffer abschmecken und mit frisch gehackter Petersilie servieren."
+        ]
+      },
+      {
+        id: "panieren",
+        name: "Panieren",
+        category: "basics",
+        categoryLabel: "Basics",
+        cooks: [],
+        image: "panieren-bild.png",
+        imageAlt: "Panierte Schnitzel mit Zitrone",
+        description: "Die klassische Panierstraße mit Mehl, Ei und Semmelbröseln.",
+        ingredients: [
+          { title: "Zum Panieren", items: [
+            { amount: null, unit: "", name: "Weizenmehl, zum Beispiel Type 405" },
+            { amount: null, unit: "", name: "Ei" },
+            { amount: null, unit: "", name: "Paniermehl oder Semmelbrösel" },
+            { amount: null, unit: "", name: "Milch oder Sahne, nach Wunsch" }
+          ] }
+        ],
+        preparation: [
+          "Das trockene Fleisch, den Fisch oder das Gemüse zuerst in Mehl wenden und überschüssiges Mehl leicht abklopfen. Das Mehl nimmt Feuchtigkeit auf, damit das Ei haftet.",
+          "Das Stück vollständig durch verquirltes Ei ziehen. Ein kleiner Schluck Milch oder Sahne macht das Ei nach Wunsch geschmeidiger.",
+          "In Paniermehl oder Semmelbröseln wenden und die Brösel nur leicht andrücken oder auflegen, damit die Panade beim Braten schön souffliert und knusprig wird."
         ]
       },
       {
@@ -1395,6 +1419,9 @@
     function openRecipe(recipe) {
       activeRecipe = recipe;
       activeServings = recipe.baseServings || defaultServings;
+      document.getElementById("servings-control").hidden = !recipe.ingredients.some(
+        (group) => group.items.some((ingredient) => ingredient.amount !== null || ingredient.alternatives)
+      );
       const unit = recipe.servingUnit || "Personen";
       document.getElementById("servings-label").textContent = recipe.servingUnit ? "Menge" : "Personenzahl";
       document.getElementById("servings-note").textContent = `Mengen werden ausgehend von ${activeServings} ${unit} angepasst.`;
