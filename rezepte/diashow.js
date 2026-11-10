@@ -4,8 +4,21 @@
   const total = 39;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let index = 1;
+  let remainingPhotos = [];
   let timer = null;
   let playing = false;
+
+  function shufflePhotos(previousIndex) {
+    const photos = Array.from({ length: total }, (_, photoIndex) => photoIndex + 1);
+    for (let i = photos.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [photos[i], photos[j]] = [photos[j], photos[i]];
+    }
+    if (photos[0] === previousIndex) {
+      [photos[0], photos[1]] = [photos[1], photos[0]];
+    }
+    return photos;
+  }
 
   function stop() {
     window.clearInterval(timer);
@@ -23,7 +36,10 @@
     button.setAttribute("aria-label", "Diashow pausieren");
     button.title = "Diashow pausieren";
     timer = window.setInterval(() => {
-      index = index % total + 1;
+      if (remainingPhotos.length === 0) {
+        remainingPhotos = shufflePhotos(index);
+      }
+      index = remainingPhotos.shift();
       image.src = `diashow/foto-${String(index).padStart(2, "0")}.jpg`;
       image.alt = `Erinnerungsfoto ${index} von ${total}`;
     }, 2000);
