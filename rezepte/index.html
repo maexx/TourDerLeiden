@@ -477,7 +477,16 @@
         <h1 id="page-title">Ausgezogen – aber nicht vom Fleisch gefallen</h1>
       </div>
       <div class="hero-slideshow" aria-label="Bilder aus unserer Küche">
-        <img class="hero-image" id="hero-slideshow-image" src="diashow/foto-01.jpg" alt="Erinnerungsfoto 1 von 39">
+        <img class="hero-image" id="hero-slideshow-image" alt="Erinnerungsfoto">
+        <script>
+          (() => {
+            const image = document.getElementById("hero-slideshow-image");
+            const index = Math.floor(Math.random() * 39) + 1;
+            image.dataset.photoIndex = String(index);
+            image.src = `diashow/foto-${String(index).padStart(2, "0")}.jpg`;
+            image.alt = `Erinnerungsfoto ${index} von 39`;
+          })();
+        </script>
         <button class="hero-slideshow-control" id="hero-slideshow-control" type="button" aria-label="Diashow abspielen" title="Diashow abspielen" hidden>▶</button>
       </div>
     </section>
@@ -550,7 +559,7 @@
     </div>
   </dialog>
 
-  <script src="diashow.js?v=41" defer></script>
+  <script src="diashow.js?v=42" defer></script>
   <script>
     const recipes = [
       {

@@ -3,8 +3,11 @@
   const button = document.getElementById("hero-slideshow-control");
   const total = 39;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let remainingPhotos = shufflePhotos(0);
-  let index = remainingPhotos.shift();
+  const initialIndex = Number(image.dataset.photoIndex);
+  let index = Number.isInteger(initialIndex) && initialIndex >= 1 && initialIndex <= total
+    ? initialIndex
+    : Math.floor(Math.random() * total) + 1;
+  let remainingPhotos = shufflePhotos(index).filter((photo) => photo !== index);
   let timer = null;
   let playing = false;
 
