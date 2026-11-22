@@ -4,6 +4,8 @@ on:
   push:
     branches: ["main", "master"]
   workflow_dispatch:
+  repository_dispatch:
+    types: [recipes-updated]
 
 permissions:
   contents: read
@@ -24,6 +26,51 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout Lekkerding recipes
+        if: vars.LEKKERDING_SYNC_ENABLED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: maexx/Lekkerding
+          ref: main
+          token: ${{ secrets.LEKKERDING_READ_TOKEN }}
+          path: .sync/lekkerding
+          persist-credentials: false
+
+      - name: Sync recipe page and referenced photos
+        if: vars.LEKKERDING_SYNC_ENABLED == 'true'
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const workspace = process.env.GITHUB_WORKSPACE;
+          const source = path.join(workspace, '.sync', 'lekkerding');
+          const destination = path.join(workspace, 'rezepte');
+          const sourceHtml = path.join(source, 'index.html');
+          const html = fs.readFileSync(sourceHtml, 'utf8');
+          const images = [...html.matchAll(/image:\s*"([^"]+)"/g)].map(match => match[1]);
+          if (images.length === 0) throw new Error('Lekkerding index.html contains no recipe image references.');
+
+          const imageFolder = path.join(source, 'PICS Rezepte');
+          const destinationImageFolder = path.join(destination, 'PICS Rezepte');
+          for (const image of images) {
+            if (!image.startsWith('PICS Rezepte/')) throw new Error(`Unexpected recipe image path: ${image}`);
+            const name = image.slice('PICS Rezepte/'.length);
+            if (!name || name.includes('/') || name.includes('\\')) throw new Error(`Invalid recipe image name: ${image}`);
+            if (!fs.statSync(path.join(imageFolder, name), { throwIfNoEntry: false })?.isFile()) {
+              throw new Error(`Recipe image is missing from Lekkerding: ${image}`);
+            }
+          }
+
+          fs.rmSync(destinationImageFolder, { recursive: true, force: true });
+          fs.mkdirSync(destinationImageFolder, { recursive: true });
+          for (const image of new Set(images)) {
+            fs.copyFileSync(path.join(imageFolder, image.slice('PICS Rezepte/'.length)), path.join(destinationImageFolder, image.slice('PICS Rezepte/'.length)));
+          }
+          fs.copyFileSync(sourceHtml, path.join(destination, 'index.html'));
+          console.log(`Synced recipe page and ${new Set(images).size} referenced photos from Lekkerding.`);
+          NODE
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
