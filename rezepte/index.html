@@ -535,6 +535,7 @@
             <button class="filter-chip" type="button" data-filter-group="category" data-filter="suppe" aria-pressed="false">Suppe</button>
             <button class="filter-chip" type="button" data-filter-group="category" data-filter="deftig" aria-pressed="false">Deftig</button>
             <button class="filter-chip" type="button" data-filter-group="category" data-filter="basics" aria-pressed="false">Basics</button>
+            <button class="filter-chip" type="button" data-filter-group="category" data-filter="xmas" aria-pressed="false">X MAS</button>
           </div>
         </div>
         <div class="filter-group">
@@ -1514,6 +1515,42 @@
           "Reisessig, Zucker und Salz bei niedriger Hitze erwärmen, bis sich Zucker und Salz gelöst haben. Nicht kochen lassen.",
           "Den heißen Reis in eine weite Schüssel geben, vorsichtig auflockern und die Essigmischung unterheben. Mit einem feuchten Tuch abdecken und auf Zimmer- beziehungsweise Körpertemperatur abkühlen lassen. Nicht in den Kühlschrank stellen, sonst wird der Reis hart."
         ]
+      },
+      {
+        id: "bapos-schokostaebchen",
+        name: "Bapos Schokostäbchen",
+        category: "süß",
+        categoryLabel: "Süß",
+        tags: ["xmas"],
+        cooks: ["bapo"],
+        image: "bapos-schokostaebchen-bild.png",
+        imageAlt: "Dunkle Schokostäbchen mit Kuvertüre neben hellen Plätzchen",
+        baseServings: 1,
+        servingUnit: "Rezeptmenge",
+        description: "Zarte Schokostäbchen mit Marzipan, Marmelade und Schokoglasur. Eine Rezeptmenge reicht für etwa 2 bis 2,5 Backbleche.",
+        ingredients: [
+          { title: "Für den Teig", items: [
+            { amount: 500, unit: "g", name: "Butter" },
+            { amount: 300, unit: "g", name: "Puderzucker" },
+            { amount: 300, unit: "g", name: "Marzipan" },
+            { amount: 4, unit: "", name: "Ei(er)" },
+            { amount: 750, unit: "g", name: "Mehl" },
+            { amount: null, unit: "", name: "Kakaopulver nach Bedarf" }
+          ] },
+          { title: "Zum Füllen und Verzieren", items: [
+            { amount: null, unit: "", name: "Marmelade, z. B. rote Johannisbeere" },
+            { amount: null, unit: "", name: "Schokoglasur" }
+          ] }
+        ],
+        preparation: [
+          "Butter, Eier und Marzipan auf Zimmertemperatur bringen. Das geht bei Bedarf auch kurz im Backofen bei 50 °C.",
+          "Backofen auf 180 °C Umluft vorheizen.",
+          "Butter und Puderzucker schaumig schlagen. Eier und zerkleinertes Marzipan in eine zweite Schüssel geben und gründlich verrühren, bis sich das Marzipan gleichmäßig verteilt hat. Die Marzipan-Ei-Mischung zur Buttermasse rühren. Mehl portionsweise unterrühren und nach Geschmack Kakaopulver hinzufügen.",
+          "Den Teig in einen Spritzbeutel mit Sterntülle füllen und gleichmäßige Streifen auf ein mit Backpapier belegtes Blech spritzen.",
+          "Die Stäbchen etwa 10 Minuten backen und anschließend abkühlen lassen.",
+          "Je zwei Plätzchen mit Marmelade zusammensetzen. Zum Schluss die Spitzen in Schokoglasur tauchen.",
+          "Eine Rezeptmenge reicht für etwa 2 bis 2,5 Backbleche."
+        ]
       }
     ];
 
@@ -1582,6 +1619,7 @@
       recipes.forEach((recipe) => {
         const card = createElement("article", "recipe-card");
         card.dataset.category = recipe.category;
+        card.dataset.tags = (recipe.tags || []).join(" ");
         card.dataset.cooks = recipe.cooks.join(" ");
 
         const image = recipe.illustration
@@ -1682,7 +1720,9 @@
       const cards = [...recipeGrid.querySelectorAll(".recipe-card")];
 
       cards.forEach((card) => {
-        const categoryMatches = activeFilters.category === "all" || card.dataset.category === activeFilters.category;
+        const categoryMatches = activeFilters.category === "all"
+          || card.dataset.category === activeFilters.category
+          || card.dataset.tags.split(" ").includes(activeFilters.category);
         const cookMatches = activeFilters.cook === "all" || card.dataset.cooks.split(" ").includes(activeFilters.cook);
         const isVisible = categoryMatches && cookMatches;
 
