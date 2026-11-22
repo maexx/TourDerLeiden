@@ -1350,7 +1350,7 @@
         image: "honig-soja-haehnchen mit reis bild.png",
         imageAlt: "Knuspriges Honig-Soja-Hähnchen mit Sesam und Reis",
         baseServings: 3,
-        description: "Mit knackigem Gemüse und glänzender Honig-Soja-Sauce. In etwa 35 Minuten fertig · einfach · 2–3 Portionen.",
+        description: "Mit knackigem Gemüse und glänzender Honig-Soja-Sauce. In etwa 35 Minuten fertig · einfach.",
         ingredients: [
           { title: "Für das Hähnchen", items: [
             { amount: 400, unit: "g", name: "Hühnerbrust" },
@@ -1393,7 +1393,7 @@
         image: "asiatische kokos-huehnersuppe bild.png",
         imageAlt: "Asiatische Kokos-Hühnersuppe mit Hähnchen, Gemüse und frischem Koriander",
         baseServings: 3,
-        description: "Aromatisch, leicht scharf und wärmend, mit Kokosmilch, Ingwer und Gemüse. In etwa 30 Minuten fertig · einfach · 2–3 Portionen.",
+        description: "Aromatisch, leicht scharf und wärmend, mit Kokosmilch, Ingwer und Gemüse. In etwa 30 Minuten fertig · einfach.",
         ingredients: [
           { title: "Für die Suppe", items: [
             { amount: 300, unit: "g", name: "Hühnerbrust oder Hühnerschenkel ohne Knochen" },
@@ -1405,7 +1405,7 @@
             { amount: 2, unit: "", name: "Knoblauchzehen, gehackt" },
             { amount: 3, unit: "cm", name: "frischer Ingwer, gerieben" },
             { amount: 2, unit: "EL", name: "Sojasauce" },
-            { amount: null, unit: "", name: "1 TL rote Currypaste (optional)" },
+            { amount: 1, unit: "TL", name: "rote Currypaste (optional)" },
             { amount: null, unit: "", name: "Öl zum Anschwitzen" },
             { amount: 1, unit: "", name: "Limette" },
             { amount: 1, unit: "TL", name: "Honig oder brauner Zucker" },
@@ -1629,13 +1629,13 @@
 
     function openRecipe(recipe) {
       activeRecipe = recipe;
-      activeServings = recipe.baseServings || defaultServings;
+      activeServings = defaultServings;
       document.getElementById("servings-control").hidden = !recipe.ingredients.some(
         (group) => group.items.some((ingredient) => ingredient.amount !== null || ingredient.alternatives)
       );
       const unit = recipe.servingUnit || "Personen";
       document.getElementById("servings-label").textContent = recipe.servingUnit ? "Menge" : "Personenzahl";
-      document.getElementById("servings-note").textContent = `Mengen werden ausgehend von ${activeServings} ${unit} angepasst.`;
+      document.getElementById("servings-note").textContent = `Mengen werden ausgehend von ${recipe.baseServings || defaultServings} ${unit} angepasst.`;
       document.getElementById("servings-decrease").setAttribute("aria-label", recipe.servingUnit ? "Menge verringern" : "Eine Person weniger");
       document.getElementById("servings-increase").setAttribute("aria-label", recipe.servingUnit ? "Menge erhöhen" : "Eine Person mehr");
       document.getElementById("dialog-category").textContent = recipe.categoryLabel;
